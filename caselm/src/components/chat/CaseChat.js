@@ -1,24 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import ChatHeader from "./ChatHeader";
 import ChatMessagesWindow from "./ChatMessagesWindow";
 import ChatInput from "./ChatInput";
 
-export default function CaseChat({ onBack, onFinish }) {
+export default function CaseChat({ caseData, onBack, onFinish }) {
   const [chatHistory, setChatHistory] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [model, setModel] = useState(null);
-
-  useEffect(() => {
-    const genAI = new GoogleGenerativeAI(
-      process.env.NEXT_PUBLIC_GOOGLE_API_KEY
-    );
-    const model = genAI.getGenerativeModel({
-      model: "learnlm-1.5-pro-experimental",
-    });
-    setModel(model);
-  }, []);
 
   const addMessageToHistory = (role, messageText) => {
     setChatHistory((prev) => [
@@ -32,20 +20,31 @@ export default function CaseChat({ onBack, onFinish }) {
 
     addMessageToHistory("user", userMessage);
     setIsLoading(true);
-
-    if (!model) {
-      console.error("Model is not initialized.");
-      setIsLoading(false);
-      return;
-    }
+    console.log(caseData);
 
     try {
-      const chat = model.startChat({ history: chatHistory });
-      const result = await chat.sendMessage(userMessage);
-      const responseMessage = result.response.text();
-      addMessageToHistory("model", responseMessage);
+      const response = await fetch("/api/gemini", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          caseData: {
+            url: caseData.url,
+            title: caseData.title,
+          },
+          userMessage,
+          chatHistory,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.response) {
+        addMessageToHistory("model", data.response);
+      } else {
+        addMessageToHistory("model", "Failed to retrieve response.");
+      }
     } catch (error) {
-      console.error("Error fetching LearnLM response:", error);
+      console.error("Error in client-side message handling:", error);
       addMessageToHistory("model", "Failed to retrieve response.");
     } finally {
       setIsLoading(false);

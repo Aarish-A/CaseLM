@@ -39,7 +39,11 @@ export default function CaseLM() {
     <Box sx={{ height: "100vh", display: "flex", overflow: "hidden" }}>
       <>
         <CaseDetail caseData={selectedCase} />
-        <CaseChat onBack={handleBack} onFinish={handleFinish} />
+        <CaseChat
+          caseData={selectedCase}
+          onBack={handleBack}
+          onFinish={handleFinish}
+        />
       </>
     </Box>
   );
