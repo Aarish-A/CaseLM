@@ -1,12 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import ChatHeader from "./ChatHeader";
 import ChatMessagesWindow from "./ChatMessagesWindow";
 import ChatInput from "./ChatInput";
+import { getChatHistory, saveChatHistory } from "../../utils/localStorage";
 
 export default function CaseChat({ caseData, onBack, onFinish }) {
   const [chatHistory, setChatHistory] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const storedHistory = getChatHistory(caseData.id);
+    if (storedHistory.length > 0) {
+      setChatHistory(storedHistory);
+    }
+  }, [caseData]);
+
+  useEffect(() => {
+    saveChatHistory(caseData.id, chatHistory);
+  }, [chatHistory, caseData]);
 
   const addMessageToHistory = (role, messageText) => {
     setChatHistory((prev) => [
