@@ -12,3 +12,7 @@ export const saveChatHistory = (caseId, chatHistory) => {
   const localStorageKey = `caseChatHistory_${caseId}`;
   localStorage.setItem(localStorageKey, JSON.stringify(chatHistory));
 };
+
+export const clearChatHistory = (caseId) => {
+  localStorage.removeItem(`caseChatHistory_${caseId}`);
+};

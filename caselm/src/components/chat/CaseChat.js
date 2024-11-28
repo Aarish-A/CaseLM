@@ -3,7 +3,11 @@ import Box from "@mui/material/Box";
 import ChatHeader from "./ChatHeader";
 import ChatMessagesWindow from "./ChatMessagesWindow";
 import ChatInput from "./ChatInput";
-import { getChatHistory, saveChatHistory } from "../../utils/localStorage";
+import {
+  getChatHistory,
+  saveChatHistory,
+  clearChatHistory,
+} from "../../utils/localStorage";
 
 export default function CaseChat({ caseData, onBack, onFinish }) {
   const [chatHistory, setChatHistory] = useState([]);
@@ -90,17 +94,21 @@ export default function CaseChat({ caseData, onBack, onFinish }) {
     }
   };
 
+  const resetChat = () => {
+    clearChatHistory(caseData.caseId);
+    setChatHistory([]);
+  };
+
   return (
     <Box
       sx={{
         width: "50%",
+        height: "100%",
         display: "flex",
         flexDirection: "column",
-        borderLeft: "1px solid #ccc",
-        padding: 2,
       }}
     >
-      <ChatHeader onBack={onBack} onFinish={onFinish} />
+      <ChatHeader onBack={onBack} onReset={resetChat} onFinish={onFinish} />
       <ChatMessagesWindow chatHistory={chatHistory} />
       <ChatInput onSendMessage={handleSendMessage} isLoading={isLoading} />
     </Box>

@@ -21,9 +21,9 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <html lang="en">
-      <body>
-        <CssBaseline>
+    <CssBaseline>
+      <html lang="en">
+        <body>
           <AppLayout
             navItems={navItems}
             handleNavigation={handleNavigation}
@@ -31,9 +31,9 @@ const Layout = ({ children }) => {
           >
             {children}
           </AppLayout>
-        </CssBaseline>
-      </body>
-    </html>
+        </body>
+      </html>
+    </CssBaseline>
   );
 };
 

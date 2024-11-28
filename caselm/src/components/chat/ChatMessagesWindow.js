@@ -13,9 +13,7 @@ export default function ChatMessagesWindow({ chatHistory }) {
         display: "flex",
         flexDirection: "column",
         gap: 2,
-        padding: 1,
-        backgroundColor: "#f9f9f9",
-        borderRadius: "8px",
+        padding: 3,
       }}
     >
       {chatHistory.length === 0 ? (

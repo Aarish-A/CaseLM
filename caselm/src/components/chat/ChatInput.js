@@ -26,9 +26,10 @@ export default function ChatInput({ onSendMessage, isLoading }) {
   return (
     <Box
       sx={{
-        marginTop: 2,
+        marginTop: 0,
+        padding: 2,
         display: "flex",
-        alignItems: "flex-end",
+        alignItems: "center",
       }}
     >
       <TextField
@@ -36,7 +37,7 @@ export default function ChatInput({ onSendMessage, isLoading }) {
         placeholder="Type your message..."
         variant="outlined"
         multiline
-        maxRows={4}
+        maxRows={6}
         value={userMessage}
         onChange={(e) => setUserMessage(e.target.value)}
         onKeyDown={handleKeyDown}
