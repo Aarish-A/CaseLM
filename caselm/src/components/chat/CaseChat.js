@@ -7,6 +7,8 @@ import {
   getChatHistory,
   saveChatHistory,
   clearChatHistory,
+  getCaseFeedback,
+  caseFeedbackExists,
 } from "../../utils/localStorage";
 
 export default function CaseChat({
@@ -120,6 +122,7 @@ export default function CaseChat({
           resetChat();
         }}
         onFinish={onFinish}
+        finished={caseFeedbackExists(caseData.id) ? true : false}
       />
       <ChatMessagesWindow chatHistory={chatHistory} />
       <ChatInput onSendMessage={handleSendMessage} isLoading={isLoading} />

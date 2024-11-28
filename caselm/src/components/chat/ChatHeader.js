@@ -1,8 +1,10 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-export default function ChatHeader({ onBack, onReset, onFinish }) {
+export default function ChatHeader({ onBack, onReset, onFinish, finished }) {
   return (
     <Box
       sx={{
@@ -16,19 +18,17 @@ export default function ChatHeader({ onBack, onReset, onFinish }) {
         paddingTop: 2,
         paddingBottom: 2,
         borderBottom: "1px solid #cccccc",
-        // boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)" /* Subtle shadow */,
-        // zIndex: "10",
       }}
     >
-      <Button onClick={onBack} variant="contained" color="primary">
-        Back
-      </Button>
+      <IconButton onClick={onBack} variant="contained" color="primary">
+        <ArrowBackIcon sx={{ color: "black" }} />
+      </IconButton>
       <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 1 }}>
         <Button onClick={onReset} variant="outlined" color="error">
           Reset Chat
         </Button>
         <Button onClick={onFinish} variant="contained" color="success">
-          Finish
+          {finished ? "View Feedback" : "Get Feedback"}
         </Button>
       </Box>
     </Box>

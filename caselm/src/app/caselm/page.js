@@ -2,40 +2,35 @@
 
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
 
 import { cases } from "../../data/cases";
 import CaseList from "../../components/CaseList";
 import CaseDetail from "../../components/CaseDetail";
 import CaseChat from "../../components/chat/CaseChat";
+import FeedbackModal from "../../components/FeedbackModal";
 import {
   getChatHistory,
   saveCaseFeedback,
   getCaseFeedback,
   clearCaseFeedback,
 } from "@/utils/localStorage";
-import ReactMarkdownTypography from "@/components/ReactMarkdownTypography";
 
 export default function CaseLM() {
   const [selectedCase, setSelectedCase] = useState(null);
   const [feedback, setFeedback] = useState(null); // Feedback content
-  const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false); // Modal visibility
+  const [feedbackModalOpen, setFeedbackModalOpen] = useState(false); // Modal visibility
 
   useEffect(() => {
     if (!selectedCase) return;
     const storedFeedback = getCaseFeedback(selectedCase.id);
-    console.log("here", feedback);
     if (storedFeedback !== "") {
       setFeedback(storedFeedback);
-      console.log("setting", feedback);
     }
   }, [selectedCase]);
 
   useEffect(() => {
     if (!selectedCase) return;
-    console.log("here2", feedback);
     saveCaseFeedback(selectedCase.id, feedback);
   }, [feedback, selectedCase]);
 
@@ -48,8 +43,8 @@ export default function CaseLM() {
   };
 
   const handleFinish = async () => {
-    if (feedback !== "") {
-      setIsFeedbackModalOpen(true);
+    if (feedback != null) {
+      setFeedbackModalOpen(true);
       return;
     }
 
@@ -70,7 +65,7 @@ export default function CaseLM() {
       if (data.response) {
         const feedbackContent = data.response;
         setFeedback(feedbackContent);
-        setIsFeedbackModalOpen(true);
+        setFeedbackModalOpen(true);
       }
     } catch (error) {
       console.error("Failed to retrieve feedback:", error);
@@ -78,8 +73,7 @@ export default function CaseLM() {
   };
 
   const handleCloseModal = () => {
-    setIsFeedbackModalOpen(false);
-    setSelectedCase(null);
+    setFeedbackModalOpen(false);
   };
 
   const handleReset = () => {
@@ -88,9 +82,9 @@ export default function CaseLM() {
 
   if (!selectedCase)
     return (
-      <Box sx={{ width: "100%" }}>
+      <Box sx={{ width: "1fr", padding: 4, maxWidth: "75%" }}>
         <Typography variant="h4" gutterBottom>
-          Case Studies
+          Select a Case
         </Typography>
         <CaseList cases={cases} onCaseSelect={handleCaseSelect} />
       </Box>
@@ -106,39 +100,12 @@ export default function CaseLM() {
           onReset={handleReset}
           onFinish={handleFinish}
         />
-        <Modal
-          open={isFeedbackModalOpen}
-          onClose={handleCloseModal}
-          aria-labelledby="feedback-modal-title"
-        >
-          <Box
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              bgcolor: "white",
-              borderRadius: 2,
-              boxShadow: 24,
-              p: 4,
-              width: "80%",
-              maxHeight: "80%",
-              overflowY: "auto",
-            }}
-          >
-            <Typography id="feedback-modal-title" variant="h6" component="h2">
-              Feedback for {selectedCase?.title}
-            </Typography>
-            <ReactMarkdownTypography>{feedback}</ReactMarkdownTypography>
-            <Button
-              variant="contained"
-              sx={{ mt: 2 }}
-              onClick={handleCloseModal}
-            >
-              Close
-            </Button>
-          </Box>
-        </Modal>
+        <FeedbackModal
+          open={feedbackModalOpen}
+          handleCloseModal={handleCloseModal}
+          caseData={selectedCase}
+          feedback={feedback}
+        />
       </>
     </Box>
   );

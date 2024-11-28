@@ -31,3 +31,9 @@ export const saveCaseFeedback = (caseId, feedback) => {
 export const clearCaseFeedback = (caseId) => {
   localStorage.removeItem(`caseFeedback_${caseId}`);
 };
+
+export const caseFeedbackExists = (caseId) => {
+  const feedback = getCaseFeedback(caseId);
+  if (feedback && feedback != "null") return true;
+  return false;
+};

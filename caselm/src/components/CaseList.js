@@ -15,6 +15,9 @@ export default function CaseList({ cases, onCaseSelect }) {
             borderRadius: 1,
             boxShadow: "0px 1px 3px rgba(0,0,0,0.1)",
             cursor: "pointer",
+            ":hover": {
+              backgroundColor: "#f3f3f3",
+            },
           }}
           onClick={() => onCaseSelect(caseItem)}
         >
