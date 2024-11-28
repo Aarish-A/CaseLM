@@ -34,7 +34,7 @@ export default function ChatInput({ onSendMessage, isLoading }) {
     >
       <TextField
         fullWidth
-        placeholder="Type your message..."
+        placeholder="Ask LearnLM..."
         variant="outlined"
         multiline
         maxRows={6}
@@ -45,7 +45,9 @@ export default function ChatInput({ onSendMessage, isLoading }) {
         sx={{
           flex: 1,
           "& .MuiOutlinedInput-root": {
-            padding: "8px",
+            padding: 1,
+            bgcolor: "white",
+            boxShadow: "0px 1px 3px rgba(0,0,0,0.1)",
           },
         }}
       />
@@ -54,7 +56,11 @@ export default function ChatInput({ onSendMessage, isLoading }) {
         color="primary"
         onClick={handleSend}
         disabled={isLoading}
-        sx={{ marginLeft: 1 }}
+        sx={{
+          marginLeft: 1,
+          height: "100%",
+          boxShadow: "0px 1px 3px rgba(0,0,0,0.1)",
+        }}
       >
         {isLoading ? <CircularProgress size={20} color="inherit" /> : "Send"}
       </Button>

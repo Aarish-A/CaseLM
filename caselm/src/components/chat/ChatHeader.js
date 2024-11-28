@@ -15,8 +15,9 @@ export default function ChatHeader({ onBack, onReset, onFinish }) {
         paddingRight: 2,
         paddingTop: 2,
         paddingBottom: 2,
-        boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)" /* Subtle shadow */,
-        zIndex: "10",
+        borderBottom: "1px solid #cccccc",
+        // boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)" /* Subtle shadow */,
+        // zIndex: "10",
       }}
     >
       <Button onClick={onBack} variant="contained" color="primary">

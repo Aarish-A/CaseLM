@@ -14,6 +14,7 @@ export default function ChatMessagesWindow({ chatHistory }) {
         flexDirection: "column",
         gap: 2,
         padding: 3,
+        bgcolor: "paper",
       }}
     >
       {chatHistory.length === 0 ? (
@@ -23,7 +24,7 @@ export default function ChatMessagesWindow({ chatHistory }) {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            color: "#aaa",
+            color: "#999",
             textAlign: "center",
           }}
         >

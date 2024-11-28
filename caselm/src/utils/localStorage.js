@@ -16,3 +16,18 @@ export const saveChatHistory = (caseId, chatHistory) => {
 export const clearChatHistory = (caseId) => {
   localStorage.removeItem(`caseChatHistory_${caseId}`);
 };
+
+export const getCaseFeedback = (caseId) => {
+  const localStorageKey = `caseFeedback_${caseId}`;
+  const storedHistory = localStorage.getItem(localStorageKey);
+  return storedHistory ? storedHistory : "";
+};
+
+export const saveCaseFeedback = (caseId, feedback) => {
+  const localStorageKey = `caseFeedback_${caseId}`;
+  localStorage.setItem(localStorageKey, feedback);
+};
+
+export const clearCaseFeedback = (caseId) => {
+  localStorage.removeItem(`caseFeedback_${caseId}`);
+};

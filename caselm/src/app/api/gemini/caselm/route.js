@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { GoogleAIFileManager } from "@google/generative-ai/server";
-import { getSystemPrompt } from "../../../utils/getSystemPrompt";
+import { getSystemPrompt } from "../../../../utils/getSystemPrompt";
 
 const path = require("path");
 
@@ -9,7 +9,7 @@ const fileManager = new GoogleAIFileManager(
   process.env.NEXT_PUBLIC_GOOGLE_API_KEY
 );
 
-const systemPrompt = getSystemPrompt("caselm.txt");
+const systemPrompt = getSystemPrompt("caselmSystem.txt");
 const model = genAI.getGenerativeModel({
   model: "learnlm-1.5-pro-experimental",
   systemInstruction: systemPrompt,

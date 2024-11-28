@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 
 // Base directory
-const systemPromptsDir = path.join(process.cwd(), "src/systemPrompts");
+const systemPromptsDir = path.join(process.cwd(), "src/prompts");
 
 export const getSystemPrompt = (filename) => {
   try {

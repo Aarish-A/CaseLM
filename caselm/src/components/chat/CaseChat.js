@@ -9,7 +9,12 @@ import {
   clearChatHistory,
 } from "../../utils/localStorage";
 
-export default function CaseChat({ caseData, onBack, onFinish }) {
+export default function CaseChat({
+  caseData,
+  onBack,
+  onReset: resetFeedback,
+  onFinish,
+}) {
   const [chatHistory, setChatHistory] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -62,7 +67,7 @@ export default function CaseChat({ caseData, onBack, onFinish }) {
     setIsLoading(true);
 
     try {
-      const response = await fetch("/api/gemini", {
+      const response = await fetch("/api/gemini/caselm", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -108,7 +113,14 @@ export default function CaseChat({ caseData, onBack, onFinish }) {
         flexDirection: "column",
       }}
     >
-      <ChatHeader onBack={onBack} onReset={resetChat} onFinish={onFinish} />
+      <ChatHeader
+        onBack={onBack}
+        onReset={() => {
+          resetFeedback();
+          resetChat();
+        }}
+        onFinish={onFinish}
+      />
       <ChatMessagesWindow chatHistory={chatHistory} />
       <ChatInput onSendMessage={handleSendMessage} isLoading={isLoading} />
     </Box>
