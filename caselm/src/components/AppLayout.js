@@ -33,12 +33,13 @@ export default function AppLayout({
         </Box>
         <Button
           onClick={() => {
-            clearLocalStorage;
+            clearLocalStorage();
+            console.log("Clearing local storage");
             location.reload();
           }}
           color="error"
         >
-          Reset
+          Full Reset
         </Button>
         <List>
           {navItems.map((item) => (

@@ -1,5 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { GoogleAIFileManager } from "@google/generative-ai/server";
+import { getSystemPrompt } from "../../../utils/getSystemPrompt";
 
 const path = require("path");
 
@@ -8,8 +9,10 @@ const fileManager = new GoogleAIFileManager(
   process.env.NEXT_PUBLIC_GOOGLE_API_KEY
 );
 
+const systemPrompt = getSystemPrompt("caselm.txt");
 const model = genAI.getGenerativeModel({
   model: "learnlm-1.5-pro-experimental",
+  systemInstruction: systemPrompt,
 });
 
 export async function POST(req) {
@@ -51,15 +54,29 @@ export async function POST(req) {
         ...chatHistory,
       ],
     });
-    const result = await chat.sendMessage([{ text: userMessage }]);
 
-    return new Response(JSON.stringify({ response: result.response.text() }), {
-      status: 200,
-    });
+    const resultStream = await chat.sendMessageStream(userMessage);
+
+    return new Response(
+      new ReadableStream({
+        async start(controller) {
+          for await (const chunk of resultStream.stream) {
+            controller.enqueue(chunk.text());
+          }
+          controller.close();
+        },
+        cancel() {
+          console.log("Stream canceled");
+        },
+      }),
+      {
+        headers: {
+          "Content-Type": "text/plain",
+        },
+      }
+    );
   } catch (error) {
-    console.error("Error in Gemini API Route:", error);
-    return new Response(JSON.stringify({ error: "Something went wrong." }), {
-      status: 500,
-    });
+    console.error("Error in Gemini API streaming:", error);
+    return new Response("Error occurred", { status: 500 });
   }
 }
