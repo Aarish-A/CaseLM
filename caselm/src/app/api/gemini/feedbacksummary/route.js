@@ -28,7 +28,7 @@ export async function POST(req) {
     });
 
     const resultStream = await chat.sendMessageStream(
-      `${userPrompt}\n\n${feedbacksString}`
+      `${userPrompt}\n\n${feedbacksString}\n\n`
     );
 
     return new Response(

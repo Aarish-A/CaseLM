@@ -62,8 +62,8 @@ export default function NameModal({ onClose }) {
             color: "#666",
           }}
         >
-          Your data is securely stored locally in your browser, except for
-          interactions with Gemini.
+          Your data is stored locally in your browser. Only Gemini interactions
+          are sent to a server.
         </Typography>
         <TextField
           label="Enter Your Name"

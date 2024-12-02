@@ -16,7 +16,6 @@ import {
   clearCaseFeedback,
   caseFeedbackExists,
 } from "@/utils/localStorage";
-import { updateFeedbackSummary } from "@/utils/api";
 
 export default function CaseLM() {
   const [selectedCase, setSelectedCase] = useState(null);
@@ -35,7 +34,7 @@ export default function CaseLM() {
   useEffect(() => {
     if (!selectedCase) return;
     saveCaseFeedback(selectedCase.id, feedback);
-  }, [feedback, selectedCase]);
+  }, [feedback]);
 
   const handleCaseSelect = (caseItem) => {
     setSelectedCase(caseItem);
@@ -43,6 +42,7 @@ export default function CaseLM() {
 
   const handleBack = () => {
     setSelectedCase(null);
+    setFeedback(null);
   };
 
   const handleFinish = async () => {
@@ -71,7 +71,6 @@ export default function CaseLM() {
         const feedbackContent = data.response;
         setFeedback(feedbackContent);
         setFeedbackModalOpen(true);
-        updateFeedbackSummary();
       }
     } catch (error) {
       console.error("Failed to process feedback:", error);

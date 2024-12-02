@@ -43,10 +43,10 @@ export default function AppLayout({
       <Drawer
         variant="permanent"
         sx={{
-          width: 240,
+          width: 200,
           flexShrink: 0,
           [`& .MuiDrawer-paper`]: {
-            width: 240,
+            width: 200,
             boxSizing: "border-box",
             backgroundColor: "#1e1e2f",
             color: "#ffffff",

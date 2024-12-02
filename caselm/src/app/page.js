@@ -7,6 +7,7 @@ import {
   CircularProgress,
   Divider,
   Typography,
+  Container,
 } from "@mui/material";
 
 import CaseList from "@/components/CaseList";
@@ -33,8 +34,12 @@ export default function Profile() {
   const [name, setName] = useState("");
 
   useEffect(() => {
-    setFeedbackSummary(getFeedbackSummary() ? getFeedbackSummary() : "DNE");
-    setName(getName ? getName : "No Name");
+    setFeedbackSummary(
+      getFeedbackSummary()
+        ? getFeedbackSummary()
+        : "Come back and update this summary once you have finished some cases!"
+    );
+    setName(getName() ? getName() : "No Name");
   }, []);
 
   const handleOverlayClose = (name) => {
@@ -101,23 +106,17 @@ export default function Profile() {
   return (
     <>
       <NameModal onClose={handleOverlayClose} />
-      <Box
-        sx={{
-          p: 4,
-          width: "100%",
-          maxWidth: "60rem",
-          margin: "0",
-        }}
-      >
+      <Box sx={{ backgroundColor: "#f3f4f6", minHeight: "100vh", py: 5 }}>
         {/* Intro Section */}
         <Box
           sx={{
-            mb: 4,
-            textAlign: "left",
+            backgroundColor: "white",
+            maxWidth: "60rem",
+            margin: "0 auto",
             borderRadius: 2,
-            backgroundColor: "Menu",
-            p: 3,
-            boxShadow: "0px 1px 3px rgba(0, 0, 0, 0.1)",
+            boxShadow: "0px 2px 6px rgba(0,0,0,0.1)",
+            p: 4,
+            mb: 3,
           }}
         >
           <Typography variant="h4" gutterBottom>
@@ -130,18 +129,18 @@ export default function Profile() {
           </Typography>
         </Box>
 
-        {/* Summary Section */}
+        {/* Feedback Summary Section */}
         <Box
           sx={{
             backgroundColor: "white",
-            p: 3,
+            maxWidth: "60rem",
+            margin: "0 auto",
             borderRadius: 2,
-            boxShadow: "0px 1px 3px rgba(0, 0, 0, 0.1)",
-            mb: 4,
-            position: "relative",
+            boxShadow: "0px 2px 6px rgba(0,0,0,0.1)",
+            p: 4,
+            mb: 3,
           }}
         >
-          {/* Header */}
           <Box
             sx={{
               display: "flex",
@@ -157,7 +156,10 @@ export default function Profile() {
               variant="contained"
               color="primary"
               onClick={handleFeedbackSummaryUpdate}
-              disabled={feedbackSummaryUpdating}
+              disabled={
+                feedbackSummaryUpdating ||
+                Object.keys(getAllCaseFeedbacks()).length === 0
+              }
               startIcon={
                 feedbackSummaryUpdating ? (
                   <CircularProgress size={20} sx={{ color: "white" }} />
@@ -167,21 +169,28 @@ export default function Profile() {
               {feedbackSummaryUpdating ? "Updating" : "Update"}
             </Button>
           </Box>
-
-          {/* Feedback Content */}
           <ReactMarkdownTypography>{feedbackSummary}</ReactMarkdownTypography>
         </Box>
 
-        <Divider sx={{ my: 3 }} />
-
         {/* Case List Section */}
-        <Typography variant="h6" gutterBottom>
-          Case Feedback
-        </Typography>
-        <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-          Click on a case below to view detailed feedback for completed cases.
-        </Typography>
-        <CaseList cases={cases} onCaseSelect={handleCaseSelect} />
+        <Box
+          sx={{
+            backgroundColor: "white",
+            maxWidth: "60rem",
+            margin: "0 auto",
+            borderRadius: 2,
+            boxShadow: "0px 2px 6px rgba(0,0,0,0.1)",
+            p: 4,
+          }}
+        >
+          <Typography variant="h6" gutterBottom>
+            Case Feedback
+          </Typography>
+          <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+            Click on a case below to view detailed feedback for completed cases.
+          </Typography>
+          <CaseList cases={cases} onCaseSelect={handleCaseSelect} doneOnly />
+        </Box>
 
         {/* Feedback Modal */}
         <FeedbackModal

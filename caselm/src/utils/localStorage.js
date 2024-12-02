@@ -68,7 +68,8 @@ export const getAllCaseFeedbacks = () => {
     const key = localStorage.key(i);
     if (key.startsWith("caseFeedback_")) {
       const caseId = key.replace("caseFeedback_", "");
-      feedbacks[caseId] = localStorage.getItem(key);
+      const fb = localStorage.getItem(key);
+      if (fb && fb != "null") feedbacks[caseId] = localStorage.getItem(key);
     }
   }
 
