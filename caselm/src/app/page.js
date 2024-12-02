@@ -1,16 +1,19 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
-import CircularProgress from "@mui/material/CircularProgress";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Divider,
+  Typography,
+} from "@mui/material";
 
-import CaseList from "../components/CaseList";
-import FeedbackModal from "../components/FeedbackModal";
+import CaseList from "@/components/CaseList";
+import FeedbackModal from "@/components/FeedbackModal";
 import ReactMarkdownTypography from "@/components/ReactMarkdownTypography";
-import { cases } from "../data/cases";
+
+import { cases } from "@/data/cases";
 import {
   getCaseFeedback,
   caseFeedbackExists,

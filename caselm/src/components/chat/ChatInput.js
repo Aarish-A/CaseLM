@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import CircularProgress from "@mui/material/CircularProgress";
+import { Box, Button, CircularProgress, TextField } from "@mui/material";
 
 export default function ChatInput({ onSendMessage, isLoading }) {
   const [userMessage, setUserMessage] = useState("");

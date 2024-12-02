@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import Box from "@mui/material/Box";
+import { Box } from "@mui/material";
+
 import ChatHeader from "./ChatHeader";
 import ChatMessagesWindow from "./ChatMessagesWindow";
 import ChatInput from "./ChatInput";
+
 import {
   getChatHistory,
   saveChatHistory,
   clearChatHistory,
   caseFeedbackExists,
-} from "../../utils/localStorage";
+} from "@/utils/localStorage";
 
 export default function CaseChat({
   caseData,

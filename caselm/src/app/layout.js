@@ -4,7 +4,7 @@ import React from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { CssBaseline } from "@mui/material";
 
-import AppLayout from "../components/AppLayout";
+import AppLayout from "@/components/AppLayout";
 
 const navItems = [
   { label: "Profile", path: "/" },

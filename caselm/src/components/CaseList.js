@@ -1,7 +1,6 @@
 import React from "react";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
+
+import { List, ListItem, ListItemText } from "@mui/material";
 
 export default function CaseList({ cases, onCaseSelect }) {
   return (

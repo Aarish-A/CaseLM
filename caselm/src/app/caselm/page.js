@@ -1,14 +1,14 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import { Box, Typography } from "@mui/material";
+
+import CaseChat from "@/components/chat/CaseChat";
+import CaseList from "@/components/CaseList";
+import CaseDetail from "@/components/CaseDetail";
+import FeedbackModal from "@/components/FeedbackModal";
 
 import { cases } from "../../data/cases";
-import CaseList from "../../components/CaseList";
-import CaseDetail from "../../components/CaseDetail";
-import CaseChat from "../../components/chat/CaseChat";
-import FeedbackModal from "../../components/FeedbackModal";
 import {
   getChatHistory,
   saveCaseFeedback,

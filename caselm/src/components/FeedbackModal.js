@@ -1,9 +1,7 @@
 import React from "react";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
+import { Box, Modal, IconButton, Typography } from "@mui/material";
+import { Close } from "@mui/icons-material";
+
 import ReactMarkdownTypography from "./ReactMarkdownTypography";
 
 export default function FeedbackModal({
@@ -56,7 +54,7 @@ export default function FeedbackModal({
             onClick={handleCloseModal}
             aria-label="close"
           >
-            <CloseIcon />
+            <Close />
           </IconButton>
         </Box>
 

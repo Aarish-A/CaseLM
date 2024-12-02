@@ -1,6 +1,6 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import Typography from "@mui/material/Typography";
+import { Typography } from "@mui/material";
 
 const MarkdownComponents = {
   p: ({ children }) => (

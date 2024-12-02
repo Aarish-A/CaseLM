@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { GoogleAIFileManager } from "@google/generative-ai/server";
-import { getSystemPrompt } from "../../../../utils/getSystemPrompt";
+import { getSystemPrompt } from "@/utils/getSystemPrompt";
 import { geminiChatHistoryToString } from "@/utils/api";
 
 const path = require("path");

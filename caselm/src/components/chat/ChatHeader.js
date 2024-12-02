@@ -1,9 +1,6 @@
 import React from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import CircularProgress from "@mui/material/CircularProgress";
-import IconButton from "@mui/material/IconButton";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { Box, Button, CircularProgress, IconButton } from "@mui/material";
+import { ArrowBack } from "@mui/icons-material";
 
 export default function ChatHeader({
   onBack,
@@ -35,7 +32,7 @@ export default function ChatHeader({
       }}
     >
       <IconButton onClick={onBack} variant="contained" color="primary">
-        <ArrowBackIcon sx={{ color: "black" }} />
+        <ArrowBack sx={{ color: "black" }} />
       </IconButton>
       <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 1 }}>
         <Button onClick={onReset} variant="outlined" color="error">

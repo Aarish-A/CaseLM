@@ -1,5 +1,5 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { getSystemPrompt } from "../../../../utils/getSystemPrompt";
+import { getSystemPrompt } from "@/utils/getSystemPrompt";
 import { cases } from "@/data/cases";
 
 const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GOOGLE_API_KEY);
