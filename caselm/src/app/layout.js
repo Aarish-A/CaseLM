@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import dynamic from "next/dynamic";
 import { usePathname, useRouter } from "next/navigation";
 import { CssBaseline } from "@mui/material";
 
@@ -37,4 +38,6 @@ const Layout = ({ children }) => {
   );
 };
 
-export default Layout;
+export default dynamic(() => Promise.resolve(Layout), {
+  ssr: false,
+});
