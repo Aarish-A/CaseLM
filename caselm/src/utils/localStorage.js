@@ -2,9 +2,17 @@ export const clearLocalStorage = () => {
   localStorage.clear();
 };
 
+export const getName = () => {
+  const name = localStorage.getItem("name");
+  return name ? name : undefined;
+};
+
+export const saveName = (name) => {
+  localStorage.setItem("name", name);
+};
+
 export const getChatHistory = (caseId) => {
-  const localStorageKey = `caseChatHistory_${caseId}`;
-  const storedHistory = localStorage.getItem(localStorageKey);
+  const storedHistory = localStorage.getItem(`caseChatHistory_${caseId}`);
   return storedHistory ? JSON.parse(storedHistory) : [];
 };
 

@@ -9,13 +9,13 @@ export default function CaseList({ cases, onCaseSelect }) {
         <ListItem
           key={caseItem.id}
           sx={{
-            backgroundColor: "#f9f9f9",
+            backgroundColor: "white",
             marginBottom: 1,
             borderRadius: 1,
             boxShadow: "0px 1px 3px rgba(0,0,0,0.1)",
             cursor: "pointer",
             ":hover": {
-              backgroundColor: "#f3f3f3",
+              backgroundColor: "#fbfbfb",
             },
           }}
           onClick={() => onCaseSelect(caseItem)}

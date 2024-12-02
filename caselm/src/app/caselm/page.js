@@ -90,7 +90,7 @@ export default function CaseLM() {
 
   if (!selectedCase)
     return (
-      <Box sx={{ width: "1fr", padding: 4, maxWidth: "75%" }}>
+      <Box sx={{ width: "1fr", padding: 4, maxWidth: "60rem" }}>
         <Typography variant="h4" gutterBottom>
           Select a Case
         </Typography>
