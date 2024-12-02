@@ -9,8 +9,10 @@ export const getChatHistory = (caseId) => {
 };
 
 export const saveChatHistory = (caseId, chatHistory) => {
-  const localStorageKey = `caseChatHistory_${caseId}`;
-  localStorage.setItem(localStorageKey, JSON.stringify(chatHistory));
+  localStorage.setItem(
+    `caseChatHistory_${caseId}`,
+    JSON.stringify(chatHistory)
+  );
 };
 
 export const clearChatHistory = (caseId) => {
@@ -18,14 +20,12 @@ export const clearChatHistory = (caseId) => {
 };
 
 export const getCaseFeedback = (caseId) => {
-  const localStorageKey = `caseFeedback_${caseId}`;
-  const storedHistory = localStorage.getItem(localStorageKey);
+  const storedHistory = localStorage.getItem(`caseFeedback_${caseId}`);
   return storedHistory ? storedHistory : "";
 };
 
 export const saveCaseFeedback = (caseId, feedback) => {
-  const localStorageKey = `caseFeedback_${caseId}`;
-  localStorage.setItem(localStorageKey, feedback);
+  localStorage.setItem(`caseFeedback_${caseId}`, feedback);
 };
 
 export const clearCaseFeedback = (caseId) => {
@@ -36,4 +36,33 @@ export const caseFeedbackExists = (caseId) => {
   const feedback = getCaseFeedback(caseId);
   if (feedback && feedback != "null") return true;
   return false;
+};
+
+export const saveFeedbackSummary = (feedbackSummary) => {
+  localStorage.setItem(`feedbackSummary`, feedbackSummary);
+};
+
+export const getFeedbackSummary = () => {
+  const feedbackSummary = localStorage.getItem(`feedbackSummary`);
+  return feedbackSummary ? feedbackSummary : "";
+};
+
+export const feedbackSummaryExists = () => {
+  const feedbackSummary = getFeedbackSummary();
+  if (feedbackSummary && feedback != "null") return true;
+  return false;
+};
+
+export const getAllCaseFeedbacks = () => {
+  const feedbacks = {};
+
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key.startsWith("caseFeedback_")) {
+      const caseId = key.replace("caseFeedback_", "");
+      feedbacks[caseId] = localStorage.getItem(key);
+    }
+  }
+
+  return feedbacks;
 };

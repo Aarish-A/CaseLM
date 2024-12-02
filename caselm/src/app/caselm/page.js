@@ -14,17 +14,20 @@ import {
   saveCaseFeedback,
   getCaseFeedback,
   clearCaseFeedback,
+  caseFeedbackExists,
 } from "@/utils/localStorage";
+import { updateFeedbackSummary } from "@/utils/api";
 
 export default function CaseLM() {
   const [selectedCase, setSelectedCase] = useState(null);
-  const [feedback, setFeedback] = useState(null); // Feedback content
-  const [feedbackModalOpen, setFeedbackModalOpen] = useState(false); // Modal visibility
+  const [feedback, setFeedback] = useState(null);
+  const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
+  const [feedbackLoading, setFeedbackLoading] = useState(false);
 
   useEffect(() => {
     if (!selectedCase) return;
-    const storedFeedback = getCaseFeedback(selectedCase.id);
-    if (storedFeedback !== "") {
+    if (caseFeedbackExists(selectedCase.id)) {
+      const storedFeedback = getCaseFeedback(selectedCase.id);
       setFeedback(storedFeedback);
     }
   }, [selectedCase]);
@@ -51,11 +54,13 @@ export default function CaseLM() {
     const chatHistory = getChatHistory(selectedCase.id);
 
     try {
+      setFeedbackLoading(true);
+      const caseData = selectedCase;
       const response = await fetch("/api/gemini/caselmfeedback", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          selectedCase,
+          caseData,
           chatHistory,
         }),
       });
@@ -66,9 +71,12 @@ export default function CaseLM() {
         const feedbackContent = data.response;
         setFeedback(feedbackContent);
         setFeedbackModalOpen(true);
+        updateFeedbackSummary();
       }
     } catch (error) {
-      console.error("Failed to retrieve feedback:", error);
+      console.error("Failed to process feedback:", error);
+    } finally {
+      setFeedbackLoading(false);
     }
   };
 
@@ -98,6 +106,7 @@ export default function CaseLM() {
           caseData={selectedCase}
           onBack={handleBack}
           onReset={handleReset}
+          feedbackLoading={feedbackLoading}
           onFinish={handleFinish}
         />
         <FeedbackModal

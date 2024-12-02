@@ -7,7 +7,6 @@ import {
   getChatHistory,
   saveChatHistory,
   clearChatHistory,
-  getCaseFeedback,
   caseFeedbackExists,
 } from "../../utils/localStorage";
 
@@ -16,6 +15,7 @@ export default function CaseChat({
   onBack,
   onReset: resetFeedback,
   onFinish,
+  feedbackLoading,
 }) {
   const [chatHistory, setChatHistory] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -59,11 +59,8 @@ export default function CaseChat({
   const handleSendMessage = async (userMessage) => {
     if (!userMessage.trim()) return;
 
-    // Add user message to the chat history
     addMessageToHistory("user", userMessage);
-
-    // Add a placeholder for the model's response
-    addMessageToHistory("model", "");
+    addMessageToHistory("model", ""); // Placeholder message to update as message gets streamed in
     const newModelMsgIndex = chatHistory.length + 1;
 
     setIsLoading(true);
@@ -122,7 +119,9 @@ export default function CaseChat({
           resetChat();
         }}
         onFinish={onFinish}
-        finished={caseFeedbackExists(caseData.id) ? true : false}
+        feedbackLoading={feedbackLoading}
+        completed={caseFeedbackExists(caseData.id) ? true : false}
+        disabled={chatHistory.length == 0 ? true : false}
       />
       <ChatMessagesWindow chatHistory={chatHistory} />
       <ChatInput onSendMessage={handleSendMessage} isLoading={isLoading} />

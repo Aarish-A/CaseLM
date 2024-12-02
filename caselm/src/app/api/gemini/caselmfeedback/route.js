@@ -21,38 +21,38 @@ export async function POST(req) {
   try {
     const { caseData, chatHistory } = await req.json();
 
-    // // Handle file upload
-    // const listFilesResponse = await fileManager.listFiles();
-    // let fileUri = null;
+    // Handle file upload
+    const listFilesResponse = await fileManager.listFiles();
+    let fileUri = null;
 
-    // const existingFile = listFilesResponse.files?.find(
-    //   (file) => file.displayName == caseData.title
-    // );
+    const existingFile = listFilesResponse.files?.find(
+      (file) => file.displayName == caseData.title
+    );
 
-    // if (existingFile) {
-    //   fileUri = existingFile.uri;
-    // } else {
-    //   const uploadResponse = await fileManager.uploadFile(
-    //     path.join(process.cwd(), "public", caseData.url),
-    //     {
-    //       mimeType: "application/pdf",
-    //       displayName: caseData.title,
-    //     }
-    //   );
-    //   fileUri = uploadResponse.file.uri;
-    // }
+    if (existingFile) {
+      fileUri = existingFile.uri;
+    } else {
+      const uploadResponse = await fileManager.uploadFile(
+        path.join(process.cwd(), "public", caseData.url),
+        {
+          mimeType: "application/pdf",
+          displayName: caseData.title,
+        }
+      );
+      fileUri = uploadResponse.file.uri;
+    }
 
     // Generate response from LearnLM
     const chat = model.startChat({
       history: [
-        // {
-        //   role: "user",
-        //   parts: [
-        //     {
-        //       fileData: { mimeType: "application/pdf", fileUri: fileUri },
-        //     },
-        //   ],
-        // },
+        {
+          role: "user",
+          parts: [
+            {
+              fileData: { mimeType: "application/pdf", fileUri: fileUri },
+            },
+          ],
+        },
       ],
     });
 

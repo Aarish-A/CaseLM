@@ -24,9 +24,11 @@ export default function FeedbackModal({
           borderRadius: 2,
           boxShadow: 24,
           p: 3,
-          width: "80%",
+          width: "70%",
           maxHeight: "80%",
           overflowY: "auto",
+          paddingX: 6,
+          paddingY: 3,
         }}
       >
         {/* Header Section */}
@@ -42,7 +44,7 @@ export default function FeedbackModal({
         >
           <Typography
             id="feedback-modal-title"
-            variant="h6"
+            variant="h5"
             component="h2"
             sx={{ fontWeight: "bold" }}
           >

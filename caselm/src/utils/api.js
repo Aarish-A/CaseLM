@@ -1,24 +1,24 @@
-export const uploadPdf = async (pdfUrl, pdfTitle) => {
+import { getAllCaseFeedbacks, saveFeedbackSummary } from "./localStorage";
+
+export const updateFeedbackSummary = async () => {
+  const caseFeedbacks = getAllCaseFeedbacks();
+
   try {
-    console.log("pdfpath & title", pdfUrl, pdfTitle);
-    const response = await fetch("/api/uploadPdf", {
+    const response = await fetch("/api/gemini/feedbacksummary", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ pdfUrl, pdfTitle }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        caseFeedbacks,
+      }),
     });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.error || "Failed to upload PDF");
-    }
-
     const data = await response.json();
-    return data.fileUri;
+
+    if (data.response) {
+      saveFeedbackSummary(data.response);
+    }
   } catch (error) {
-    console.error("Error in uploadPdf:", error);
-    throw error;
+    console.error("Failed to process feedback:", error);
   }
 };
 
