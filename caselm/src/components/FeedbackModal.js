@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Modal, IconButton, Typography } from "@mui/material";
+import { Box, Modal, IconButton, Typography, Divider } from "@mui/material";
 import { Close } from "@mui/icons-material";
 
 import ReactMarkdownTypography from "./ReactMarkdownTypography";
@@ -21,12 +21,10 @@ export default function FeedbackModal({
           bgcolor: "white",
           borderRadius: 2,
           boxShadow: 24,
-          p: 3,
           width: "70%",
           maxHeight: "80%",
           overflowY: "auto",
-          paddingX: 6,
-          paddingY: 3,
+          padding: 4,
         }}
       >
         {/* Header Section */}
@@ -36,30 +34,56 @@ export default function FeedbackModal({
             justifyContent: "space-between",
             alignItems: "center",
             mb: 2,
-            borderBottom: "1px solid #ccc",
-            pb: 1,
+            borderRadius: "8px",
+            padding: "8px 16px",
           }}
         >
           <Typography
             id="feedback-modal-title"
             variant="h5"
-            component="h2"
-            sx={{ fontWeight: "bold" }}
+            sx={{
+              fontWeight: "bold",
+              maxWidth: "85%",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
           >
-            Case Feedback for: {caseData?.title}
+            Case Feedback: {caseData?.title}
           </Typography>
           <IconButton
             edge="end"
-            color="inherit"
             onClick={handleCloseModal}
-            aria-label="close"
+            sx={{
+              color: "black",
+              transition: "color 0.1s ease-in-out",
+              ":hover": {
+                color: "error.main",
+              },
+            }}
           >
             <Close />
           </IconButton>
         </Box>
 
+        <Divider sx={{ mb: 2 }} />
+
         {/* Feedback Content */}
-        <ReactMarkdownTypography>{feedback}</ReactMarkdownTypography>
+        <Box
+          sx={{
+            padding: 3,
+            border: "none",
+            overflowWrap: "break-word",
+          }}
+        >
+          {feedback ? (
+            <ReactMarkdownTypography>{feedback}</ReactMarkdownTypography>
+          ) : (
+            <Typography color="text.secondary">
+              No feedback available for this case.
+            </Typography>
+          )}
+        </Box>
       </Box>
     </Modal>
   );

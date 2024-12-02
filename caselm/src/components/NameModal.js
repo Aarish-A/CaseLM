@@ -30,7 +30,7 @@ export default function NameModal({ onClose }) {
     <Modal
       open={open}
       sx={{
-        backdropFilter: "blur(3px)",
+        backdropFilter: "blur(4px)",
         backgroundColor: "rgba(0, 0, 0, 0.4)",
       }}
     >

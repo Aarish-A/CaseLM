@@ -28,6 +28,7 @@ export default function AppLayout({
   const handleCloseResetModal = () => setResetModalOpen(false);
   const handleFullReset = () => {
     clearLocalStorage();
+    handleNavigation("/");
     location.reload();
   };
 

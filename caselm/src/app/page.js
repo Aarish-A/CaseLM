@@ -1,14 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Divider,
-  Typography,
-  Container,
-} from "@mui/material";
+import { Box, Button, CircularProgress, Typography } from "@mui/material";
 
 import CaseList from "@/components/CaseList";
 import FeedbackModal from "@/components/FeedbackModal";
@@ -39,7 +32,7 @@ export default function Profile() {
         ? getFeedbackSummary()
         : "Come back and update this summary once you have finished some cases!"
     );
-    setName(getName() ? getName() : "No Name");
+    setName(getName() ? getName() : "");
   }, []);
 
   const handleOverlayClose = (name) => {
