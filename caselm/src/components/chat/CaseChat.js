@@ -94,7 +94,10 @@ export default function CaseChat({
       }
     } catch (error) {
       console.error("Streaming error:", error);
-      updateMessageText(newModelMsgIndex, "Error occurred during streaming.");
+      updateMessageText(
+        newModelMsgIndex,
+        "Error occurred during streaming. Try Again."
+      );
     } finally {
       setIsLoading(false);
     }

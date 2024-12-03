@@ -27,6 +27,7 @@ export default function ChatInput({ onSendMessage, isLoading }) {
         padding: 2,
         display: "flex",
         alignItems: "center",
+        bgcolor: "white",
       }}
     >
       <TextField
@@ -43,7 +44,7 @@ export default function ChatInput({ onSendMessage, isLoading }) {
           flex: 1,
           "& .MuiOutlinedInput-root": {
             padding: 1,
-            bgcolor: "white",
+            bgcolor: "paper",
             boxShadow: "0px 1px 3px rgba(0,0,0,0.1)",
           },
         }}

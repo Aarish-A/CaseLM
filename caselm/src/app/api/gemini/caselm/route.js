@@ -77,6 +77,6 @@ export async function POST(req) {
     );
   } catch (error) {
     console.error("Error in Gemini API streaming:", error);
-    return new Response("Error occurred", { status: 500 });
+    return new Response("Error occurred, try again.", { status: 500 });
   }
 }

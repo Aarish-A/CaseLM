@@ -44,10 +44,10 @@ export default function AppLayout({
       <Drawer
         variant="permanent"
         sx={{
-          width: 200,
+          width: 175,
           flexShrink: 0,
           [`& .MuiDrawer-paper`]: {
-            width: 200,
+            width: 175,
             boxSizing: "border-box",
             backgroundColor: "#1e1e2f",
             color: "#ffffff",
@@ -63,7 +63,7 @@ export default function AppLayout({
           }}
         >
           <Typography variant="h5" component="div">
-            LearnLM
+            CaseLM
           </Typography>
         </Box>
         <Divider sx={{ borderColor: "rgba(255, 255, 255, 0.2)" }} />

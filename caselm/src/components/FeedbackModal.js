@@ -21,7 +21,8 @@ export default function FeedbackModal({
           bgcolor: "white",
           borderRadius: 2,
           boxShadow: 24,
-          width: "70%",
+          width: "85%",
+          maxWidth: "65rem",
           maxHeight: "80%",
           overflowY: "auto",
           padding: 4,
@@ -33,7 +34,7 @@ export default function FeedbackModal({
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            mb: 2,
+            mb: 1,
             borderRadius: "8px",
             padding: "8px 16px",
           }}
@@ -66,12 +67,13 @@ export default function FeedbackModal({
           </IconButton>
         </Box>
 
-        <Divider sx={{ mb: 2 }} />
+        <Divider sx={{ mb: 1 }} />
 
         {/* Feedback Content */}
         <Box
           sx={{
-            padding: 3,
+            p: 3,
+            pt: 2,
             border: "none",
             overflowWrap: "break-word",
           }}

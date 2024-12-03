@@ -1,5 +1,11 @@
-import React from "react";
-import { Box, Button, CircularProgress, IconButton } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  IconButton,
+  Tooltip,
+} from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
 
 export default function ChatHeader({
@@ -10,10 +16,20 @@ export default function ChatHeader({
   disabled,
   completed,
 }) {
+  const [showTooltip, setShowTooltip] = useState(false);
+
   const getFeedbackButtonText = () => {
     if (feedbackLoading) return <CircularProgress size={20} color="inherit" />;
     else if (completed) return "View Feedback";
     else return "Get Feedback";
+  };
+
+  const handleFeedbackClick = () => {
+    if (!completed) {
+      setShowTooltip(true);
+      setTimeout(() => setShowTooltip(false), 5000); // Hide tooltip after 3 seconds
+    }
+    onFinish();
   };
 
   return (
@@ -38,14 +54,21 @@ export default function ChatHeader({
         <Button onClick={onReset} variant="outlined" color="error">
           Reset Chat
         </Button>
-        <Button
-          onClick={onFinish}
-          variant="contained"
-          color="success"
-          disabled={disabled}
+        <Tooltip
+          title="Hold tight, usually takes 10-15 seconds"
+          open={showTooltip}
+          arrow
+          disableHoverListener
         >
-          {getFeedbackButtonText()}
-        </Button>
+          <Button
+            onClick={handleFeedbackClick}
+            variant="contained"
+            color="success"
+            disabled={disabled}
+          >
+            {getFeedbackButtonText()}
+          </Button>
+        </Tooltip>
       </Box>
     </Box>
   );
