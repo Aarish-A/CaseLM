@@ -89,16 +89,41 @@ export default function CaseLM() {
 
   if (!selectedCase)
     return (
-      <Box sx={{ width: "1fr", padding: 4, maxWidth: "60rem" }}>
-        <Typography variant="h4" gutterBottom>
-          Select a Case
-        </Typography>
-        <CaseList cases={cases} onCaseSelect={handleCaseSelect} />
+      <Box sx={{ backgroundColor: "#f9fafc", minHeight: "100vh", py: 5 }}>
+        <Box
+          sx={{
+            backgroundColor: "white",
+            maxWidth: "60rem",
+            margin: "0 auto",
+            borderRadius: 2,
+            boxShadow: "0px 2px 6px rgba(0,0,0,0.1)",
+            p: 4,
+            mb: 3,
+            textAlign: "center",
+          }}
+        >
+          <Typography variant="h4" gutterBottom>
+            Select a Case
+          </Typography>
+          <Typography variant="body1">
+            Choose any of the Ivey Cases below.
+          </Typography>
+        </Box>
+        <Box sx={{ maxWidth: "60rem", margin: "0 auto" }}>
+          <CaseList cases={cases} onCaseSelect={handleCaseSelect} />
+        </Box>
       </Box>
     );
 
   return (
-    <Box sx={{ height: "100vh", display: "flex", overflow: "hidden" }}>
+    <Box
+      sx={{
+        height: "100vh",
+        display: "flex",
+        overflow: "hidden",
+        backgroundColor: "#f9fafc",
+      }}
+    >
       <>
         <CaseDetail caseData={selectedCase} />
         <CaseChat

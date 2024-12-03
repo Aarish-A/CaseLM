@@ -9,45 +9,30 @@ export default function CaseDetail({ caseData }) {
         flexDirection: "column",
         height: "100%",
         width: "50%",
+        bgcolor: "white",
       }}
     >
       <Box
         sx={{
           display: "flex",
-          height: "4rem",
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: "white",
-          paddingLeft: 2,
-          paddingRight: 2,
-          paddingTop: 2,
-          paddingBottom: 2,
-          borderBottom: "1px solid #cccccc",
+          pt: 2,
         }}
       >
-        <Typography
-          variant="h5"
-          sx={{
-            textAlign: "center",
-          }}
-        >
+        <Typography variant="h5" sx={{ fontWeight: "bold" }}>
           {caseData.title}
         </Typography>
       </Box>
-
-      <Box
-        sx={{
-          flex: 1,
-          overflow: "hidden",
-        }}
-      >
+      <Box sx={{ flex: 1, p: 2 }}>
         <iframe
           src={caseData.url}
           title={`Case: ${caseData.title}`}
           style={{
             width: "100%",
             height: "100%",
-            border: "none",
+            borderRadius: "8px",
+            border: "1px solid #e0e0e0",
           }}
         />
       </Box>

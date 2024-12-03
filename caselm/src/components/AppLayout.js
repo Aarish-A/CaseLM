@@ -2,15 +2,14 @@ import React, { useState } from "react";
 import {
   Box,
   Button,
-  Divider,
   Drawer,
   List,
   ListItem,
   ListItemButton,
-  ListItemText,
-  Modal,
   IconButton,
+  Tooltip,
   Typography,
+  Modal,
 } from "@mui/material";
 import { Home, Assignment, Group, RestartAlt } from "@mui/icons-material";
 
@@ -39,76 +38,121 @@ export default function AppLayout({
   };
 
   return (
-    <Box sx={{ display: "flex", minHeight: "100vh" }}>
+    <Box
+      sx={{ display: "flex", minHeight: "100vh", backgroundColor: "#ffffff" }}
+    >
       {/* Sidebar */}
       <Drawer
         variant="permanent"
         sx={{
-          width: 175,
+          width: 240,
           flexShrink: 0,
           [`& .MuiDrawer-paper`]: {
-            width: 175,
+            width: 240,
             boxSizing: "border-box",
-            backgroundColor: "#1e1e2f",
-            color: "#ffffff",
+            backgroundColor: "#f0f4f8",
+            px: 2,
+            py: 3,
+            border: "none",
           },
         }}
       >
         <Box
           sx={{
-            p: 2,
             display: "flex",
             alignItems: "center",
-            justifyContent: "center",
+            justifyContent: "space-between",
+            px: 2,
+            mb: 2,
           }}
         >
-          <Typography variant="h5" component="div">
+          <Typography variant="h5" component="div" sx={{ fontWeight: "bold" }}>
             CaseLM
           </Typography>
         </Box>
-        <Divider sx={{ borderColor: "rgba(255, 255, 255, 0.2)" }} />
         <List>
-          {navItems.map((item) => (
-            <ListItem key={item.label} disablePadding>
-              <ListItemButton
-                onClick={() => handleNavigation(item.path)}
-                selected={pathname === item.path}
-                sx={{
-                  color: pathname === item.path ? "#4caf50" : "#ffffff",
-                  "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
-                }}
-              >
-                <IconButton
-                  sx={{
-                    color: pathname === item.path ? "#4caf50" : "#ffffff",
-                  }}
+          {navItems.map((item) => {
+            const isDisabled = item.label === "GroupLM";
+            return (
+              <ListItem key={item.label} disablePadding>
+                <Tooltip
+                  title={isDisabled ? "Coming Soon" : ""}
+                  arrow
+                  placement="right"
                 >
-                  {navIcons[item.label]}
-                </IconButton>
-                <ListItemText
-                  primary={item.label}
-                  sx={{
-                    ml: 1,
-                    fontWeight: pathname === item.path ? "bold" : "normal",
-                  }}
-                />
-              </ListItemButton>
-            </ListItem>
-          ))}
+                  <span style={{ width: "100%" }}>
+                    <ListItemButton
+                      onClick={() => !isDisabled && handleNavigation(item.path)}
+                      selected={pathname === item.path && !isDisabled}
+                      disabled={isDisabled}
+                      sx={{
+                        borderRadius: 3,
+                        color: isDisabled
+                          ? "#303030"
+                          : pathname === item.path
+                          ? "#000000"
+                          : "#454746",
+                        backgroundColor: isDisabled
+                          ? "transparent"
+                          : pathname === item.path
+                          ? "#d3e2fd"
+                          : "transparent",
+                        "&:hover": {
+                          backgroundColor:
+                            isDisabled || pathname === item.path
+                              ? "transparent"
+                              : "#e5e7eb",
+                        },
+                        px: 2,
+                        mb: 1,
+                        pointerEvents: isDisabled ? "none" : "auto",
+                      }}
+                    >
+                      <IconButton
+                        sx={{
+                          color: pathname === item.path ? "#000000" : "#454746",
+                        }}
+                      >
+                        {navIcons[item.label]}
+                      </IconButton>
+                      <Typography
+                        sx={{
+                          fontWeight:
+                            pathname === item.path ? "bold" : "normal",
+                          ml: 1,
+                        }}
+                      >
+                        {item.label}
+                      </Typography>
+                    </ListItemButton>
+                  </span>
+                </Tooltip>
+              </ListItem>
+            );
+          })}
         </List>
         <Box sx={{ flexGrow: 1 }} />
         {/* Full Reset Button */}
-        <Box sx={{ p: 2, mt: "auto" }}>
-          <Button
-            startIcon={<RestartAlt />}
-            variant="contained"
-            color="error"
-            fullWidth
-            onClick={handleOpenResetModal}
-          >
-            Full Reset
-          </Button>
-        </Box>
+        <Button
+          variant="contained"
+          fullWidth
+          onClick={handleOpenResetModal}
+          sx={{
+            mt: 2,
+            py: 1.5,
+            borderRadius: "20px",
+            backgroundColor: "#ffcbda",
+            color: "black",
+            boxShadow: "none",
+            ":hover": {
+              boxShadow: "none",
+              color: "red",
+            },
+          }}
+        >
+          <RestartAlt sx={{ mr: 1 }} />
+          Full Reset
+        </Button>
       </Drawer>
 
       {/* Main Content Area */}
@@ -118,7 +162,7 @@ export default function AppLayout({
           flexGrow: 1,
           padding: 0,
           margin: 0,
-          backgroundColor: "#f5f5f5",
+          backgroundColor: "#f9fafc",
         }}
       >
         {children}

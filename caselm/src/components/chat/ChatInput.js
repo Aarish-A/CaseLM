@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Box, Button, CircularProgress, TextField } from "@mui/material";
+import { Box, CircularProgress, TextField, IconButton } from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
 
 export default function ChatInput({ onSendMessage, isLoading }) {
   const [userMessage, setUserMessage] = useState("");
@@ -23,45 +24,68 @@ export default function ChatInput({ onSendMessage, isLoading }) {
   return (
     <Box
       sx={{
-        marginTop: 0,
-        padding: 2,
         display: "flex",
         alignItems: "center",
-        bgcolor: "white",
+        padding: 2,
+        borderRadius: 1,
       }}
     >
-      <TextField
-        fullWidth
-        placeholder="Ask LearnLM..."
-        variant="outlined"
-        multiline
-        maxRows={6}
-        value={userMessage}
-        onChange={(e) => setUserMessage(e.target.value)}
-        onKeyDown={handleKeyDown}
-        disabled={isLoading}
+      <Box
         sx={{
           flex: 1,
-          "& .MuiOutlinedInput-root": {
-            padding: 1,
-            bgcolor: "paper",
-            boxShadow: "0px 1px 3px rgba(0,0,0,0.1)",
-          },
-        }}
-      />
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleSend}
-        disabled={isLoading}
-        sx={{
-          marginLeft: 1,
-          height: "100%",
-          boxShadow: "0px 1px 3px rgba(0,0,0,0.1)",
+          position: "relative",
+          display: "flex",
+          alignItems: "flex-end",
         }}
       >
-        {isLoading ? <CircularProgress size={20} color="inherit" /> : "Send"}
-      </Button>
+        <TextField
+          fullWidth
+          placeholder="Ask LearnLM..."
+          variant="outlined"
+          multiline
+          maxRows={6}
+          value={userMessage}
+          onChange={(e) => setUserMessage(e.target.value)}
+          onKeyDown={handleKeyDown}
+          disabled={isLoading}
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              pl: 4,
+              pr: 8,
+              borderRadius: 7,
+              backgroundColor: "#f0f4f8",
+              transition: "background-color 0.3s ease",
+              "&:hover": {
+                backgroundColor: "#f0f4f8",
+              },
+              "&.Mui-focused": {
+                backgroundColor: "#e9eef6",
+              },
+              "& fieldset": {
+                border: "none",
+              },
+            },
+            "& .MuiInputBase-input": {
+              color: "#000000",
+              "&::placeholder": {
+                color: "#5f6367",
+              },
+            },
+          }}
+        />
+        <IconButton
+          onClick={handleSend}
+          disabled={isLoading}
+          color="default"
+          sx={{
+            position: "absolute",
+            right: 15,
+            bottom: 8,
+          }}
+        >
+          {isLoading ? <CircularProgress size={20} /> : <SendIcon />}
+        </IconButton>
+      </Box>
     </Box>
   );
 }

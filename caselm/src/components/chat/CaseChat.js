@@ -115,6 +115,7 @@ export default function CaseChat({
         height: "100%",
         display: "flex",
         flexDirection: "column",
+        bgcolor: "white",
       }}
     >
       <ChatHeader

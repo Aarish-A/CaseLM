@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -44,7 +44,6 @@ export default function ChatHeader({
         paddingRight: 2,
         paddingTop: 2,
         paddingBottom: 2,
-        borderBottom: "1px solid #cccccc",
       }}
     >
       <IconButton onClick={onBack} variant="contained" color="primary">
