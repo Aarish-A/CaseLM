@@ -124,22 +124,20 @@ export default function CaseLM() {
         backgroundColor: "#f9fafc",
       }}
     >
-      <>
-        <CaseDetail caseData={selectedCase} />
-        <CaseChat
-          caseData={selectedCase}
-          onBack={handleBack}
-          onReset={handleReset}
-          feedbackLoading={feedbackLoading}
-          onFinish={handleFinish}
-        />
-        <FeedbackModal
-          open={feedbackModalOpen}
-          handleCloseModal={handleCloseModal}
-          caseData={selectedCase}
-          feedback={feedback}
-        />
-      </>
+      <CaseChat
+        caseData={selectedCase}
+        onBack={handleBack}
+        onReset={handleReset}
+        feedbackLoading={feedbackLoading}
+        onFinish={handleFinish}
+      />
+      <CaseDetail caseData={selectedCase} />
+      <FeedbackModal
+        open={feedbackModalOpen}
+        handleCloseModal={handleCloseModal}
+        caseData={selectedCase}
+        feedback={feedback}
+      />
     </Box>
   );
 }

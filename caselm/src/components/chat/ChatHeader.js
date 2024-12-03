@@ -5,10 +5,12 @@ import {
   CircularProgress,
   IconButton,
   Tooltip,
+  Typography,
 } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
 
 export default function ChatHeader({
+  caseData,
   onBack,
   onReset,
   onFinish,
@@ -27,7 +29,7 @@ export default function ChatHeader({
   const handleFeedbackClick = () => {
     if (!completed) {
       setShowTooltip(true);
-      setTimeout(() => setShowTooltip(false), 5000); // Hide tooltip after 3 seconds
+      setTimeout(() => setShowTooltip(false), 7000); // Hide tooltip after x seconds
     }
     onFinish();
   };
@@ -46,9 +48,15 @@ export default function ChatHeader({
         paddingBottom: 2,
       }}
     >
-      <IconButton onClick={onBack} variant="contained" color="primary">
-        <ArrowBack sx={{ color: "black" }} />
-      </IconButton>
+      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+        <IconButton onClick={onBack} variant="contained" color="primary">
+          <ArrowBack sx={{ color: "black" }} />
+        </IconButton>
+        <Typography variant="h6" sx={{ fontWeight: "bold", textAlign: "left" }}>
+          {caseData.title}
+        </Typography>
+      </Box>
+
       <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 1 }}>
         <Button onClick={onReset} variant="outlined" color="error">
           Reset Chat

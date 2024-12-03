@@ -100,20 +100,23 @@ export default function CaseList({ cases, onCaseSelect, doneOnly }) {
                     >
                       {caseItem.tags &&
                         caseItem.tags.map((tag, index) => (
-                          <Box
-                            key={index}
-                            sx={{
-                              backgroundColor: "#f1f1f1",
-                              color: "#555",
-                              borderRadius: "12px",
-                              padding: "2px 8px",
-                              fontSize: "0.75rem",
-                              fontWeight: 500,
-                              border: "1px solid #ddd",
-                            }}
-                          >
-                            {tag}
-                          </Box>
+                          <>
+                            <Box
+                              key={index}
+                              sx={{
+                                backgroundColor:
+                                  tag === "Example" ? "#ffca0a" : "#fafafa",
+                                color: tag === "Example" ? "#000" : "#555",
+                                borderRadius: "12px",
+                                padding: "2px 8px",
+                                fontSize: "0.75rem",
+                                fontWeight: 500,
+                                border: "1px solid #ddd",
+                              }}
+                            >
+                              {tag}
+                            </Box>
+                          </>
                         ))}
                     </Box>
                   </CardContent>

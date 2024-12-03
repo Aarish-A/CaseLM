@@ -132,10 +132,9 @@ export default function AppLayout({
           })}
         </List>
         <Box sx={{ flexGrow: 1 }} />
-        {/* Full Reset Button */}
+        {/* App Reset Button */}
         <Button
           variant="contained"
-          fullWidth
           onClick={handleOpenResetModal}
           sx={{
             mt: 2,
@@ -151,7 +150,7 @@ export default function AppLayout({
           }}
         >
           <RestartAlt sx={{ mr: 1 }} />
-          Full Reset
+          Reset App
         </Button>
       </Drawer>
 

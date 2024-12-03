@@ -1,19 +1,19 @@
 export const cases = [
   {
     id: 1,
+    title: "Medi Displays",
+    url: "cases/sample-case-2-medi-displays.pdf",
+    tags: ["Example", "Cost Behaviour", "Managerial Analysis"],
+    description:
+      "George Robson examines the financial and strategic implications of a contract termination request from Medi-Displays' largest customer​.",
+  },
+  {
+    id: 2,
     title: "Carson Planters",
     url: "cases/sample-case-1-carson-planters.pdf",
     tags: ["Cost Behaviour", "Managerial Analysis"],
     description:
       "Richard and Kathy Carson evaluate a special order for their plastic garden pots, balancing profitability against strategic growth opportunities.",
-  },
-  {
-    id: 2,
-    title: "Medi Displays",
-    url: "cases/sample-case-2-medi-displays.pdf",
-    tags: ["Cost Behaviour", "Managerial Analysis"],
-    description:
-      "George Robson examines the financial and strategic implications of a contract termination request from Medi-Displays' largest customer​.",
   },
   {
     id: 3,

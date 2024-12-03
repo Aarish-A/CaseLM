@@ -26,7 +26,8 @@ export default function ChatInput({ onSendMessage, isLoading }) {
       sx={{
         display: "flex",
         alignItems: "center",
-        padding: 2,
+        px: 2,
+        py: 3,
         borderRadius: 1,
       }}
     >

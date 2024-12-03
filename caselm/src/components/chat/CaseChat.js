@@ -5,6 +5,7 @@ import ChatHeader from "./ChatHeader";
 import ChatMessagesWindow from "./ChatMessagesWindow";
 import ChatInput from "./ChatInput";
 
+import { exampleConversationMediDisplays } from "@/data/exampleConversationMediDisplays";
 import {
   getChatHistory,
   saveChatHistory,
@@ -26,6 +27,8 @@ export default function CaseChat({
     const storedHistory = getChatHistory(caseData.id);
     if (storedHistory.length > 0) {
       setChatHistory(storedHistory);
+    } else if (caseData.id === 1) {
+      setChatHistory(exampleConversationMediDisplays);
     }
   }, [caseData]);
 
@@ -119,6 +122,7 @@ export default function CaseChat({
       }}
     >
       <ChatHeader
+        caseData={caseData}
         onBack={onBack}
         onReset={() => {
           resetFeedback();
@@ -129,7 +133,10 @@ export default function CaseChat({
         completed={caseFeedbackExists(caseData.id) ? true : false}
         disabled={chatHistory.length == 0 ? true : false}
       />
-      <ChatMessagesWindow chatHistory={chatHistory} />
+      <ChatMessagesWindow
+        chatHistory={chatHistory}
+        onSendDefaultMessage={handleSendMessage}
+      />
       <ChatInput onSendMessage={handleSendMessage} isLoading={isLoading} />
     </Box>
   );

@@ -12,18 +12,6 @@ export default function CaseDetail({ caseData }) {
         bgcolor: "white",
       }}
     >
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          pt: 2,
-        }}
-      >
-        <Typography variant="h5" sx={{ fontWeight: "bold" }}>
-          {caseData.title}
-        </Typography>
-      </Box>
       <Box sx={{ flex: 1, p: 2 }}>
         <iframe
           src={caseData.url}

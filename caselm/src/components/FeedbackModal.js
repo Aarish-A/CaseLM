@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Modal, IconButton, Typography, Divider } from "@mui/material";
+import { Box, Modal, IconButton, Typography } from "@mui/material";
 import { Close } from "@mui/icons-material";
 
 import ReactMarkdownTypography from "./ReactMarkdownTypography";
@@ -18,14 +18,15 @@ export default function FeedbackModal({
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          bgcolor: "white",
+          bgcolor: "#f9fafc",
           borderRadius: 2,
-          boxShadow: 24,
+          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
           width: "85%",
-          maxWidth: "65rem",
-          maxHeight: "80%",
+          maxWidth: "70rem",
+          maxHeight: "90%",
           overflowY: "auto",
-          padding: 4,
+          px: 6,
+          py: 4,
         }}
       >
         {/* Header Section */}
@@ -34,9 +35,9 @@ export default function FeedbackModal({
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            mb: 1,
-            borderRadius: "8px",
-            padding: "8px 16px",
+            px: 2,
+            pt: 0,
+            pb: 2,
           }}
         >
           <Typography
@@ -44,20 +45,21 @@ export default function FeedbackModal({
             variant="h5"
             sx={{
               fontWeight: "bold",
-              maxWidth: "85%",
+              color: "#2c3e50",
+              maxWidth: "80%",
               whiteSpace: "nowrap",
               overflow: "hidden",
               textOverflow: "ellipsis",
             }}
           >
-            Case Feedback: {caseData?.title}
+            Feedback for: {caseData?.title}
           </Typography>
           <IconButton
             edge="end"
             onClick={handleCloseModal}
             sx={{
-              color: "black",
-              transition: "color 0.1s ease-in-out",
+              color: "#9ea3a8",
+              transition: "color 0.2s ease-in-out",
               ":hover": {
                 color: "error.main",
               },
@@ -67,21 +69,34 @@ export default function FeedbackModal({
           </IconButton>
         </Box>
 
-        <Divider sx={{ mb: 1 }} />
-
         {/* Feedback Content */}
         <Box
           sx={{
             p: 3,
-            pt: 2,
-            border: "none",
+            backgroundColor: "#ffffff",
+            borderRadius: 2,
+            boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.05)",
             overflowWrap: "break-word",
           }}
         >
           {feedback ? (
-            <ReactMarkdownTypography>{feedback}</ReactMarkdownTypography>
+            <ReactMarkdownTypography
+              sx={{
+                fontSize: "16px",
+                color: "#4f5b62",
+                lineHeight: 1.6,
+              }}
+            >
+              {feedback}
+            </ReactMarkdownTypography>
           ) : (
-            <Typography color="text.secondary">
+            <Typography
+              sx={{
+                fontSize: "14px",
+                color: "#9ea3a8",
+                textAlign: "center",
+              }}
+            >
               No feedback available for this case.
             </Typography>
           )}
