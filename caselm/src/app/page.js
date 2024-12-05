@@ -31,7 +31,7 @@ export default function Profile() {
     setFeedbackSummary(
       getFeedbackSummary()
         ? getFeedbackSummary()
-        : "Come back and update this summary once you have finished some cases!"
+        : "Press the update button on the right to see your feedback!"
     );
     setName(getName() ? getName() : "");
   }, []);
@@ -110,8 +110,7 @@ export default function Profile() {
             backgroundColor: "white",
             maxWidth: "60rem",
             margin: "0 auto",
-            borderRadius: 2,
-            boxShadow: "0px 2px 6px rgba(0,0,0,0.1)",
+            borderRadius: 4,
             p: 4,
             mb: 3,
           }}

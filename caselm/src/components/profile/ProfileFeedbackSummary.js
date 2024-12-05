@@ -53,7 +53,6 @@ export default function ProfileFeedbackSummary({
           </Button>
         </Box>
       </Box>
-      <Divider sx={{ my: 3 }} />
       <ReactMarkdownTypography>{feedbackSummary}</ReactMarkdownTypography>
     </>
   );

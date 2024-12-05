@@ -39,8 +39,7 @@ export default function CaseList({ cases, onCaseSelect, doneOnly }) {
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-between",
-                    boxShadow: "0px 4px 10px rgba(0,0,0,0.1)",
-                    borderRadius: 2,
+                    borderRadius: 4,
                     transition: "transform 0.2s ease-in-out",
                     ":hover": {
                       transform: "scale(1.02)",
@@ -114,7 +113,7 @@ export default function CaseList({ cases, onCaseSelect, doneOnly }) {
                                 border: "1px solid #ddd",
                               }}
                             >
-                              {tag}
+                              {tag === "Example" ? "Example Conversation" : tag}
                             </Box>
                           </>
                         ))}
@@ -130,7 +129,6 @@ export default function CaseList({ cases, onCaseSelect, doneOnly }) {
                       backgroundColor: status.color,
                       color: "white",
                       py: 1,
-                      borderRadius: "0 0 8px 8px", // Rounded bottom corners
                     }}
                   >
                     <Typography variant="body2" sx={{ fontWeight: "bold" }}>

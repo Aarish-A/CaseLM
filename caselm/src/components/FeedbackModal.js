@@ -19,14 +19,13 @@ export default function FeedbackModal({
           left: "50%",
           transform: "translate(-50%, -50%)",
           bgcolor: "#f9fafc",
-          borderRadius: 2,
+          borderRadius: 4,
           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
           width: "85%",
           maxWidth: "70rem",
           maxHeight: "90%",
           overflowY: "auto",
-          px: 6,
-          py: 4,
+          p: 6,
         }}
       >
         {/* Header Section */}
@@ -72,9 +71,9 @@ export default function FeedbackModal({
         {/* Feedback Content */}
         <Box
           sx={{
-            p: 3,
+            p: 4,
             backgroundColor: "#ffffff",
-            borderRadius: 2,
+            borderRadius: 4,
             boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.05)",
             overflowWrap: "break-word",
           }}

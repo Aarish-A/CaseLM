@@ -33,7 +33,7 @@ export default function ProfileIntroButtons() {
             gap: 1,
             flexDirection: "column",
             alignItems: "center",
-            borderRadius: 2,
+            borderRadius: 4,
             boxShadow: "0px 4px 10px rgba(0,0,0,0.1)",
             ":hover": {
               boxShadow: "0px 6px 15px rgba(0,0,0,0.2)",
@@ -66,7 +66,7 @@ export default function ProfileIntroButtons() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            borderRadius: 2,
+            borderRadius: 4,
             boxShadow: "0px 4px 10px rgba(0,0,0,0.1)",
           }}
           disabled
