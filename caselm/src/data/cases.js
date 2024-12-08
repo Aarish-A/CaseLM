@@ -3,7 +3,8 @@ export const cases = [
     id: 1,
     title: "Medi Displays",
     url: "cases/sample-case-2-medi-displays.pdf",
-    tags: ["Example", "Cost Behaviour", "Managerial Analysis"],
+    tags: ["Cost Behaviour", "Managerial Analysis"],
+    hasExample: true,
     description:
       "George Robson examines the financial and strategic implications of a contract termination request from Medi-Displays' largest customer​.",
   },
@@ -12,6 +13,7 @@ export const cases = [
     title: "Carson Planters",
     url: "cases/sample-case-1-carson-planters.pdf",
     tags: ["Cost Behaviour", "Managerial Analysis"],
+    hasExample: false,
     description:
       "Richard and Kathy Carson evaluate a special order for their plastic garden pots, balancing profitability against strategic growth opportunities.",
   },
@@ -20,6 +22,7 @@ export const cases = [
     title: "TLC Pools Ltd",
     url: "cases/sample-case-3-tlc-pools.pdf",
     tags: ["HR & Org. Behaviour"],
+    hasExample: false,
     description:
       "Jack Armstrong addresses staffing challenges after the sudden resignation of a key supervisor during the busiest season.",
   },
@@ -28,6 +31,7 @@ export const cases = [
     title: "Eternal Faucets Limited",
     url: "cases/sample-case-4-eternal-faucets.pdf",
     tags: ["Accounting (Managerial)"],
+    hasExample: false,
     description:
       "Greg Lawrence examines a potential equipment investment to reduce production costs and navigate volatile demand in the plumbing industry.",
   },
@@ -36,6 +40,7 @@ export const cases = [
     title: "Ontario Products",
     url: "cases/sample-case-5-ontario-products.pdf",
     tags: ["Entrepreneurship"],
+    hasExample: false,
     description:
       "Elise Hoffman investigates cash flow issues in her newly acquired craft and gift distributorship despite growing sales.",
   },
@@ -44,6 +49,7 @@ export const cases = [
     title: "Whitewater Specialties Limited",
     url: "cases/sample-case-6-whitewater-specialties.pdf",
     tags: ["Strategy"],
+    hasExample: false,
     description:
       "Peter Winford assesses the feasibility of a large custom order for fiberglass fascia signs, which could significantly expand operation.",
   },
@@ -52,6 +58,7 @@ export const cases = [
     title: "Strand Art Products",
     url: "cases/sample-case-7-strand-art-products.pdf",
     tags: ["Operations", "Accounting (Managerial)"],
+    hasExample: false,
     description:
       "Peter Brady evaluates the profitability of a bulk order for utility mirrors, weighing pricing, production capacity, and cash flow implications​.",
   },
@@ -60,6 +67,7 @@ export const cases = [
     title: "Josie's Flowers",
     url: "cases/sample-case-8-josies-flowers.pdf",
     tags: ["Entrepreneurship"],
+    hasExample: false,
     description:
       "Josie Bailer considers expanding her seasonal garden outlet into a year-round flower shop while balancing family and financial constraints.",
   },
@@ -68,6 +76,7 @@ export const cases = [
     title: "Terra Minerals Limited",
     url: "cases/sample-case-9-terra-minerals.pdf",
     tags: ["HR & Org. Behaviour"],
+    hasExample: false,
     description:
       "John Parson discovers troubling information about a key employee’s past and must decide how to handle the potential reputational risks.",
   },
@@ -76,6 +85,7 @@ export const cases = [
     title: "Berdytch Clothing Ltd.",
     url: "cases/sample-case-10-berdytch-clothing.pdf",
     tags: ["Financial Analysis", "General Management"],
+    hasExample: false,
     description:
       "Cristina Berdytch takes over her family’s children’s clothing business, grappling with operational inefficiencies and succession challenges​.",
   },
@@ -84,6 +94,7 @@ export const cases = [
     title: "Regent Flooring Inc.",
     url: "cases/sample-case-11-regent-flooring.pdf",
     tags: ["Operations"],
+    hasExample: false,
     description:
       "Chad Bartos evaluates manufacturing capacity and equipment needs as he prepares for a surge in demand for tri-laminated flooring​.",
   },
@@ -92,6 +103,7 @@ export const cases = [
     title: "Lamrock Limited",
     url: "cases/sample-case-12-lamrock-limited.pdf",
     tags: ["Financial Analysis"],
+    hasExample: false,
     description:
       "Tom Baxter faces an urgent need to prepare financial statements after the departure of his accountant to meet a critical bank review.",
   },
@@ -100,6 +112,7 @@ export const cases = [
     title: "Suits for Men, Inc.",
     url: "cases/sample-case-13-suits-for-men.pdf",
     tags: ["Accounting (Managerial)"],
+    hasExample: false,
     description:
       "Michael Bakshi must decide whether to replace tailor-made suits with medium-priced suits, balancing space, profitability, and market impact.",
   },
@@ -108,6 +121,7 @@ export const cases = [
     title: "Bankruptcy",
     url: "cases/sample-case-14-bankruptcy.pdf",
     tags: ["Operations"],
+    hasExample: false,
     description:
       "Katie Graf manages production challenges and cost efficiency for launching a new adult board game called Bankruptcy​.",
   },
@@ -116,6 +130,7 @@ export const cases = [
     title: "Sports Unlimited (Halifax)",
     url: "cases/sample-case-15-sports-unlimited-halifax.pdf",
     tags: ["Marketing"],
+    hasExample: false,
     description:
       "Jack Glenkowsky designs a marketing plan to recover losses from low enrolment in a sports facility during winter seasons.",
   },
@@ -124,6 +139,7 @@ export const cases = [
     title: "Over The Top Care",
     url: "cases/sample-case-16-over-the-top-care.pdf",
     tags: ["Marketing", "Entrepreneurship"],
+    hasExample: false,
     description:
       "Jason Lapchinski explores turning his part-time car detailing service into a full-time business amidst economic uncertainty.",
   },
@@ -132,6 +148,7 @@ export const cases = [
     title: "Foremost Department Stores Inc.",
     url: "cases/sample-case-17-foremost-department-stores.pdf",
     tags: ["HR & Org. Behaviour"],
+    hasExample: false,
     description:
       "Ryan Gregson must hire a leader for a new customer service department to improve competitive positioning against Target stores.",
   },
@@ -140,6 +157,7 @@ export const cases = [
     title: "Recreational Living",
     url: "cases/sample-case-18-recreational-living.pdf",
     tags: ["Operations"],
+    hasExample: false,
     description:
       "James MacPherson decides on relocating canoe and boat manufacturing operations, balancing community ties, capacity constraints, and potential disruptions.",
   },

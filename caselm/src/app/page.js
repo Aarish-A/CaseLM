@@ -113,6 +113,8 @@ export default function Profile() {
             borderRadius: 4,
             p: 4,
             mb: 3,
+            border: 1,
+            borderColor: "#e9eef6",
           }}
         >
           {hasFeedback ? (

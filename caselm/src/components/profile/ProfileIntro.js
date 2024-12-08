@@ -28,6 +28,8 @@ export default function ProfileIntro({ name }) {
         p: 4,
         mb: 3,
         textAlign: "center",
+        border: 1,
+        borderColor: "#e9eef6",
       }}
     >
       <Typography variant="h4" gutterBottom>

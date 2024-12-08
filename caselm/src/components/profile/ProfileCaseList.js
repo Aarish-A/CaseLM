@@ -13,6 +13,8 @@ export default function ProfileCaseList({ handleCaseSelect }) {
         margin: "0 auto",
         borderRadius: 4,
         p: 4,
+        border: 1,
+        borderColor: "#e9eef6",
       }}
     >
       <Typography variant="h5" gutterBottom>

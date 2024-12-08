@@ -39,12 +39,15 @@ export default function CaseList({ cases, onCaseSelect, doneOnly }) {
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-between",
+                    border: 1,
+                    borderColor: "#e9eef6",
                     borderRadius: 4,
                     transition: "transform 0.2s ease-in-out",
                     ":hover": {
                       transform: "scale(1.02)",
                     },
-                    minHeight: "250px", // Ensures consistent card heights
+                    minHeight: "250px",
+                    boxShadow: "none",
                   }}
                 >
                   <CardContent
@@ -80,7 +83,7 @@ export default function CaseList({ cases, onCaseSelect, doneOnly }) {
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                         display: "-webkit-box",
-                        WebkitLineClamp: 3, // Limits description to three lines
+                        WebkitLineClamp: 4, // Limits description to three lines
                         WebkitBoxOrient: "vertical",
                       }}
                     >
@@ -97,25 +100,48 @@ export default function CaseList({ cases, onCaseSelect, doneOnly }) {
                         flexWrap: "wrap",
                       }}
                     >
+                      {caseItem?.hasExample && (
+                        <Box
+                          sx={{
+                            backgroundColor: "#ffca0a",
+                            color: "#000",
+                            borderRadius: "12px",
+                            padding: "2px 8px",
+                            fontSize: "0.75rem",
+                            fontWeight: 500,
+                            border: "1px solid #ddd",
+                            mb: 0.7,
+                          }}
+                        >
+                          Example Conversation
+                        </Box>
+                      )}
+                    </Box>
+                    <Box
+                      sx={{
+                        mt: "auto",
+                        display: "flex",
+                        gap: 1,
+                        flexWrap: "wrap",
+                      }}
+                    >
                       {caseItem.tags &&
                         caseItem.tags.map((tag, index) => (
-                          <>
-                            <Box
-                              key={index}
-                              sx={{
-                                backgroundColor:
-                                  tag === "Example" ? "#ffca0a" : "#fafafa",
-                                color: tag === "Example" ? "#000" : "#555",
-                                borderRadius: "12px",
-                                padding: "2px 8px",
-                                fontSize: "0.75rem",
-                                fontWeight: 500,
-                                border: "1px solid #ddd",
-                              }}
-                            >
-                              {tag === "Example" ? "Example Conversation" : tag}
-                            </Box>
-                          </>
+                          <Box
+                            key={index}
+                            sx={{
+                              backgroundColor:
+                                tag === "Example" ? "#ffca0a" : "#fafafa",
+                              color: tag === "Example" ? "#000" : "#555",
+                              borderRadius: "12px",
+                              padding: "2px 8px",
+                              fontSize: "0.75rem",
+                              fontWeight: 500,
+                              border: "1px solid #ddd",
+                            }}
+                          >
+                            {tag === "Example" ? "Example Conversation" : tag}
+                          </Box>
                         ))}
                     </Box>
                   </CardContent>
