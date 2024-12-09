@@ -9,13 +9,18 @@ import {
 } from "@mui/material";
 
 import { caseFeedbackExists, getChatHistory } from "@/utils/localStorage";
+import { cases } from "@/data/cases";
 
 export default function CaseList({ cases, onCaseSelect, doneOnly }) {
   const getCaseStatus = (caseId) => {
-    if (caseFeedbackExists(caseId)) return { label: "Done", color: "#4caf50" }; // Green
-    if (getChatHistory(caseId).length > 0)
-      return { label: "Continue", color: "#ff9800" }; // Orange
-    return { label: "Not Started", color: "#f44336" }; // Red
+    if (caseFeedbackExists(caseId))
+      return { label: doneOnly ? "View Feedback" : "Done", color: "#4caf50" }; // Green
+    if (
+      getChatHistory(caseId).length > 0 ||
+      cases.find(({ id }) => id === caseId)?.hasExample
+    )
+      return { label: "Continue", color: "#68bc6a" }; // Orange
+    return { label: "Not Started", color: "#afafaf" }; // Red
   };
 
   return (
@@ -66,7 +71,7 @@ export default function CaseList({ cases, onCaseSelect, doneOnly }) {
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                         display: "-webkit-box",
-                        WebkitLineClamp: 2, // Limits title to two lines
+                        WebkitLineClamp: 1, // Limits number of lines title takes up
                         WebkitBoxOrient: "vertical",
                       }}
                     >
@@ -83,7 +88,7 @@ export default function CaseList({ cases, onCaseSelect, doneOnly }) {
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                         display: "-webkit-box",
-                        WebkitLineClamp: 4, // Limits description to three lines
+                        WebkitLineClamp: 4, // Limits number of lines description takes up
                         WebkitBoxOrient: "vertical",
                       }}
                     >
@@ -103,13 +108,13 @@ export default function CaseList({ cases, onCaseSelect, doneOnly }) {
                       {caseItem?.hasExample && (
                         <Box
                           sx={{
-                            backgroundColor: "#ffca0a",
-                            color: "#000",
+                            backgroundColor: "#fcd858",
+                            color: "#333",
                             borderRadius: "12px",
-                            padding: "2px 8px",
+                            padding: "2px 10px",
                             fontSize: "0.75rem",
+                            border: "none",
                             fontWeight: 500,
-                            border: "1px solid #ddd",
                             mb: 0.7,
                           }}
                         >
@@ -130,17 +135,16 @@ export default function CaseList({ cases, onCaseSelect, doneOnly }) {
                           <Box
                             key={index}
                             sx={{
-                              backgroundColor:
-                                tag === "Example" ? "#ffca0a" : "#fafafa",
-                              color: tag === "Example" ? "#000" : "#555",
+                              backgroundColor: "#fafafa",
+                              color: "#555",
                               borderRadius: "12px",
-                              padding: "2px 8px",
+                              padding: "2px 10px",
                               fontSize: "0.75rem",
                               fontWeight: 500,
                               border: "1px solid #ddd",
                             }}
                           >
-                            {tag === "Example" ? "Example Conversation" : tag}
+                            {tag}
                           </Box>
                         ))}
                     </Box>

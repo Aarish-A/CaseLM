@@ -34,13 +34,16 @@ export default function FeedbackModal({
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            px: 2,
-            pt: 0,
-            pb: 2,
+            px: 4,
+            py: 2,
+            mb: 2,
+            backgroundColor: "#ffffff",
+            borderRadius: 4,
+            border: 1,
+            borderColor: "#e9eef6",
           }}
         >
           <Typography
-            id="feedback-modal-title"
             variant="h5"
             sx={{
               fontWeight: "bold",
@@ -51,7 +54,7 @@ export default function FeedbackModal({
               textOverflow: "ellipsis",
             }}
           >
-            Feedback for: {caseData?.title}
+            Your feedback for {caseData?.title}
           </Typography>
           <IconButton
             edge="end"
@@ -74,8 +77,9 @@ export default function FeedbackModal({
             p: 4,
             backgroundColor: "#ffffff",
             borderRadius: 4,
-            boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.05)",
             overflowWrap: "break-word",
+            border: 1,
+            borderColor: "#e9eef6",
           }}
         >
           {feedback ? (

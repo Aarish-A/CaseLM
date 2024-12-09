@@ -17,7 +17,7 @@ export default function ProfileCaseList({ handleCaseSelect }) {
         borderColor: "#e9eef6",
       }}
     >
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="h5" sx={{ mb: 2.5 }} gutterBottom>
         Case Feedback
       </Typography>
       <CaseList cases={cases} onCaseSelect={handleCaseSelect} doneOnly />

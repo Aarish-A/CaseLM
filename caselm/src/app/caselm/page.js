@@ -106,8 +106,11 @@ export default function CaseLM() {
           <Typography variant="h4" gutterBottom>
             Select a Case
           </Typography>
-          <Typography variant="body1">
-            Choose any of the Ivey Cases below.
+          <Typography variant="body2" color="text.secondary">
+            Choose any of the Ivey Business School cases below to tackle
+            together with CaseLM and get feedback. Each case tackles a unique,
+            open-ended problem that requires you to tie in multiple concepts
+            together.
           </Typography>
         </Box>
         <Box sx={{ maxWidth: "60rem", margin: "0 auto" }}>

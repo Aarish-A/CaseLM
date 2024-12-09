@@ -36,9 +36,9 @@ export default function ProfileIntro({ name }) {
         Hi <span style={{ color: "#1876d2" }}>{displayName}</span> 👋
       </Typography>
       <Typography variant="body1">
-        Welcome to your profile! Here, you can view a summary of your feedback,
-        track your progress, and revisit detailed feedback for the cases you’ve
-        completed.
+        Welcome to CaseLM! On this page, you can view a summary of your
+        feedback, track your progress, and revisit detailed feedback for the
+        cases you’ve completed.
       </Typography>
     </Box>
   );
