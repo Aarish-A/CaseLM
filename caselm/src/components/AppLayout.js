@@ -139,7 +139,7 @@ export default function AppLayout({
           sx={{
             mt: 2,
             py: 1.5,
-            borderRadius: "20px",
+            borderRadius: 2,
             backgroundColor: "#ffcbda",
             color: "black",
             boxShadow: "none",

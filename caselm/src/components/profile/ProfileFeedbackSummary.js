@@ -37,9 +37,10 @@ export default function ProfileFeedbackSummary({
               ) : null
             }
             sx={{
+              borderRadius: 2,
               animation:
                 feedbackSummary ===
-                "Come back and update this summary once you have finished some cases!"
+                "Press the update button on the right to see your feedback!"
                   ? "pulse 2s infinite"
                   : "none",
               "@keyframes pulse": {

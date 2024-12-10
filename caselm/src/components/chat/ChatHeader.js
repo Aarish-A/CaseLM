@@ -58,7 +58,12 @@ export default function ChatHeader({
       </Box>
 
       <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 1 }}>
-        <Button onClick={onReset} variant="outlined" color="error">
+        <Button
+          onClick={onReset}
+          variant="outlined"
+          color="error"
+          sx={{ borderRadius: 2 }}
+        >
           Reset Chat
         </Button>
         <Tooltip
@@ -72,6 +77,7 @@ export default function ChatHeader({
             variant="contained"
             color="success"
             disabled={disabled}
+            sx={{ borderRadius: 2 }}
           >
             {getFeedbackButtonText()}
           </Button>

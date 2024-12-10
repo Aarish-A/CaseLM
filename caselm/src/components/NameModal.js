@@ -30,7 +30,7 @@ export default function NameModal({ onClose }) {
     <Modal
       open={open}
       sx={{
-        backdropFilter: "blur(4px)",
+        backdropFilter: "blur(6px)",
         backgroundColor: "rgba(0, 0, 0, 0.4)",
       }}
     >
@@ -40,45 +40,69 @@ export default function NameModal({ onClose }) {
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          bgcolor: "rgba(255, 255, 255, 0.9)",
-          borderRadius: 3,
-          p: 4,
-          width: "400px",
+          bgcolor: "white",
+          background: "linear-gradient(135deg, #f7f9fc, #f0f4f8)",
+          borderRadius: 4,
+          p: 6,
+          width: "100%",
+          maxWidth: "25rem",
           textAlign: "center",
+          boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.15)",
         }}
       >
+        {/* Title */}
         <Typography
           variant="h5"
           gutterBottom
-          sx={{ fontWeight: "bold", color: "#333" }}
-        >
-          Welcome to the App
-        </Typography>
-        <Typography
-          variant="body1"
-          color="textSecondary"
           sx={{
-            mb: 3,
-            color: "#666",
+            fontWeight: "bold",
+            color: "#2c3e50",
+            mb: 1,
+          }}
+        >
+          Welcome to CaseLM!
+        </Typography>
+
+        {/* Subtitle */}
+        <Typography
+          variant="body2"
+          sx={{
+            color: "#5f6367",
+            mb: 4,
           }}
         >
           Your data is stored locally in your browser. Only Gemini interactions
           are sent to a server.
         </Typography>
+
+        {/* Input Field */}
         <TextField
-          label="Enter Your Name"
-          variant="outlined"
+          placeholder="Enter your name"
+          variant="filled"
           fullWidth
           value={name}
           onChange={(e) => setName(e.target.value)}
           onKeyDown={handleKeyDown}
+          InputProps={{
+            disableUnderline: true,
+          }}
           sx={{
             mb: 3,
+            backgroundColor: "#f0f4f8",
+            borderRadius: 2,
+            "&:hover": { backgroundColor: "#e9eef6" },
+            "&.Mui-focused": { backgroundColor: "#e9eef6" },
+            input: {
+              color: "#333",
+              fontSize: "16px",
+              padding: "12px",
+            },
           }}
         />
+
+        {/* Confirm Button */}
         <Button
           variant="contained"
-          color="primary"
           fullWidth
           onClick={handleConfirm}
           disabled={!name.trim()}
@@ -87,6 +111,15 @@ export default function NameModal({ onClose }) {
             textTransform: "none",
             fontSize: "16px",
             fontWeight: "bold",
+            background: !name.trim()
+              ? "#e0e4e9"
+              : "linear-gradient(135deg, #2F80ED, #56CCF2)",
+            color: !name.trim() ? "#a0a6b0" : "white",
+            transition: "all 0.3s ease-in-out",
+            ":hover": {
+              background:
+                name.trim() && "linear-gradient(135deg, #2F80ED, #56CCF2)",
+            },
           }}
         >
           Confirm
