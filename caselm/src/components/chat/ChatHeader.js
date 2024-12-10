@@ -78,6 +78,7 @@ export default function ChatHeader({
             color="success"
             disabled={disabled}
             sx={{ borderRadius: 2 }}
+            disableElevation
           >
             {getFeedbackButtonText()}
           </Button>

@@ -45,10 +45,10 @@ export default function AppLayout({
       <Drawer
         variant="permanent"
         sx={{
-          width: 200,
+          width: 185,
           flexShrink: 0,
           [`& .MuiDrawer-paper`]: {
-            width: 200,
+            width: 185,
             boxSizing: "border-box",
             backgroundColor: "#f0f4f8",
             px: 2,
@@ -104,6 +104,7 @@ export default function AppLayout({
                               : "#e5e7eb",
                         },
                         px: 1,
+                        py: 0,
                         mb: 1,
                         pointerEvents: isDisabled ? "none" : "auto",
                       }}
@@ -136,17 +137,12 @@ export default function AppLayout({
         <Button
           variant="contained"
           onClick={handleOpenResetModal}
+          size="small"
+          disableElevation
+          color="error"
           sx={{
-            mt: 2,
-            py: 1.5,
+            py: 1,
             borderRadius: 2,
-            backgroundColor: "#ffcbda",
-            color: "black",
-            boxShadow: "none",
-            ":hover": {
-              boxShadow: "none",
-              color: "red",
-            },
           }}
         >
           <RestartAlt sx={{ mr: 1 }} />

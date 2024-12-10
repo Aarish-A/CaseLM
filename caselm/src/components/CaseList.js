@@ -19,7 +19,7 @@ export default function CaseList({ cases, onCaseSelect, doneOnly }) {
       getChatHistory(caseId).length > 0 ||
       cases.find(({ id }) => id === caseId)?.hasExample
     )
-      return { label: "Continue", color: "#68bc6a" }; // Orange
+      return { label: "Continue", color: "#ff9800" }; // Orange
     return { label: "Not Started", color: "#afafaf" }; // Red
   };
 
