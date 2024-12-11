@@ -22,19 +22,18 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <CssBaseline>
-      <html lang="en">
-        <body>
-          <AppLayout
-            navItems={navItems}
-            handleNavigation={handleNavigation}
-            pathname={pathname}
-          >
-            {children}
-          </AppLayout>
-        </body>
-      </html>
-    </CssBaseline>
+    <html lang="en">
+      <body>
+        <CssBaseline />
+        <AppLayout
+          navItems={navItems}
+          handleNavigation={handleNavigation}
+          pathname={pathname}
+        >
+          {children}
+        </AppLayout>
+      </body>
+    </html>
   );
 };
 

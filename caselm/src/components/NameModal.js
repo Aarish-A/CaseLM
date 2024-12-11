@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { Box, Button, Modal, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Modal,
+  TextField,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 
 import { getName, saveName } from "@/utils/localStorage";
 
 export default function NameModal({ onClose }) {
   const [name, setName] = useState("");
   const [open, setOpen] = useState(true);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   useEffect(() => {
     const storedName = getName();
@@ -45,7 +55,7 @@ export default function NameModal({ onClose }) {
           borderRadius: 4,
           p: 6,
           width: "100%",
-          maxWidth: "25rem",
+          maxWidth: isMobile ? "80%" : "25rem",
           textAlign: "center",
           boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.15)",
         }}
@@ -106,6 +116,7 @@ export default function NameModal({ onClose }) {
           fullWidth
           onClick={handleConfirm}
           disabled={!name.trim()}
+          disableElevation
           sx={{
             py: 1.5,
             textTransform: "none",

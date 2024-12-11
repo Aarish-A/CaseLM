@@ -1,9 +1,19 @@
 import React from "react";
-import { Box, Button, Typography, Divider, Tooltip } from "@mui/material";
+import {
+  Box,
+  Button,
+  Typography,
+  Tooltip,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import GroupIcon from "@mui/icons-material/Group";
 
 export default function ProfileIntroButtons() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
     <>
       <Typography variant="h5" gutterBottom>
@@ -16,6 +26,7 @@ export default function ProfileIntroButtons() {
       <Box
         sx={{
           display: "flex",
+          flexDirection: isMobile ? "column" : "row",
           gap: 3,
           justifyContent: "center",
           mt: 3,
@@ -52,6 +63,7 @@ export default function ProfileIntroButtons() {
             sx={{
               fontWeight: "bold",
               color: "rgba(255,255,255,0.95)",
+              textAlign: "center",
             }}
           >
             Explore CaseLM
@@ -95,6 +107,7 @@ export default function ProfileIntroButtons() {
                 sx={{
                   fontWeight: "bold",
                   color: "#a0a6b0",
+                  textAlign: "center",
                 }}
               >
                 Explore GroupLM

@@ -151,7 +151,7 @@ export default function AppLayout({
     <Box
       sx={{
         display: "flex",
-        height: "100vh",
+        height: "-webkit-fill-available",
         backgroundColor: "#ffffff",
       }}
     >
@@ -231,6 +231,7 @@ export default function AppLayout({
             borderRadius: 2,
             boxShadow: 24,
             p: 4,
+            maxWidth: "80%",
           }}
         >
           <Typography variant="h6" gutterBottom>

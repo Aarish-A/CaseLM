@@ -49,7 +49,6 @@ export default function ChatHeader({
         backgroundColor: "white",
         px: isMobile ? 1 : 2,
         py: 1,
-        borderBottom: "1px solid #e0e0e0",
       }}
     >
       {/* Left Section: Back Button + Title */}
