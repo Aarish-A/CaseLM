@@ -151,7 +151,7 @@ export default function AppLayout({
     <Box
       sx={{
         display: "flex",
-        height: "-webkit-fill-available",
+        height: "100svh",
         backgroundColor: "#ffffff",
       }}
     >

@@ -138,6 +138,7 @@ export default function CaseChat({
       <ChatMessagesWindow
         chatHistory={chatHistory}
         onSendDefaultMessage={handleSendMessage}
+        showExampleSnippitsLink={caseData.hasExample}
       />
       <ChatInput onSendMessage={handleSendMessage} isLoading={isLoading} />
     </Box>

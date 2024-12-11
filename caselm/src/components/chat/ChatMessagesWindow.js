@@ -1,10 +1,11 @@
 import React from "react";
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography, Button, Link } from "@mui/material";
 import ChatMessage from "./ChatMessage";
 
 export default function ChatMessagesWindow({
   chatHistory,
   onSendDefaultMessage,
+  showExampleSnippitsLink = false,
 }) {
   const defaultMessages = [
     "I'm not sure where to begin, could you help me out?",
@@ -20,10 +21,42 @@ export default function ChatMessagesWindow({
         display: "flex",
         flexDirection: "column",
         gap: 0,
-        padding: 3,
         bgcolor: "white",
+        position: "relative",
       }}
     >
+      {/* Sticky Box */}
+      {showExampleSnippitsLink && (
+        <Box
+          sx={{
+            position: "sticky",
+            top: 0,
+            zIndex: 10,
+            backgroundColor: "white",
+            py: 1,
+            px: 2,
+            mx: 3,
+            textAlign: "center",
+            borderRadius: 3,
+            border: 1,
+            borderColor: "#afafaf",
+          }}
+        >
+          <Typography variant="body2" color="text.secondary">
+            To see some insights on how this conversation went, check out the{" "}
+            <Link
+              href="https://github.com/Aarish-A/CaseLM/"
+              target="_blank"
+              rel="noopener"
+            >
+              GitHub README
+            </Link>
+            .
+          </Typography>
+        </Box>
+      )}
+
+      {/* Empty State */}
       {chatHistory.length === 0 ? (
         <Box
           sx={{
@@ -34,6 +67,7 @@ export default function ChatMessagesWindow({
             justifyContent: "center",
             color: "#999",
             textAlign: "center",
+            px: 2,
           }}
         >
           <Typography variant="body1" sx={{ marginBottom: 2 }}>
@@ -66,12 +100,15 @@ export default function ChatMessagesWindow({
           </Box>
         </Box>
       ) : (
+        // Chat History
         chatHistory.map((chat, index) => (
           <Box
             key={index}
             sx={{
               display: "flex",
               justifyContent: chat.role === "user" ? "flex-end" : "flex-start",
+              px: 2,
+              py: 1,
             }}
           >
             <ChatMessage

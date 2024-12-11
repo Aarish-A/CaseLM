@@ -47,7 +47,7 @@ export default function ChatHeader({
         alignItems: "center",
         height: "4rem",
         backgroundColor: "white",
-        px: isMobile ? 1 : 2,
+        px: 2,
         py: 1,
       }}
     >
@@ -64,7 +64,7 @@ export default function ChatHeader({
             whiteSpace: "nowrap",
             overflow: "hidden",
             textOverflow: "ellipsis",
-            maxWidth: isMobile ? "70%" : "100%",
+            flexGrow: 1,
           }}
         >
           {caseData.title}
