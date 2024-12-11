@@ -1,7 +1,14 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Box, Typography } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Tabs,
+  Tab,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 
 import CaseChat from "@/components/chat/CaseChat";
 import CaseList from "@/components/CaseList";
@@ -22,6 +29,10 @@ export default function CaseLM() {
   const [feedback, setFeedback] = useState(null);
   const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
   const [feedbackLoading, setFeedbackLoading] = useState(false);
+  const [currentTab, setCurrentTab] = useState(0); // For mobile view toggle
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   useEffect(() => {
     if (!selectedCase) return;
@@ -43,6 +54,7 @@ export default function CaseLM() {
   const handleBack = () => {
     setSelectedCase(null);
     setFeedback(null);
+    setCurrentTab(0); // Reset mobile view to first tab
   };
 
   const handleFinish = async () => {
@@ -89,7 +101,9 @@ export default function CaseLM() {
 
   if (!selectedCase)
     return (
-      <Box sx={{ backgroundColor: "#f9fafc", minHeight: "100vh", py: 5 }}>
+      <Box
+        sx={{ backgroundColor: "#f9fafc", minHeight: "100vh", py: 5, px: 4 }}
+      >
         <Box
           sx={{
             backgroundColor: "white",
@@ -120,22 +134,52 @@ export default function CaseLM() {
     );
 
   return (
-    <Box
-      sx={{
-        height: "100vh",
-        display: "flex",
-        overflow: "hidden",
-        backgroundColor: "#f9fafc",
-      }}
-    >
-      <CaseChat
-        caseData={selectedCase}
-        onBack={handleBack}
-        onReset={handleReset}
-        feedbackLoading={feedbackLoading}
-        onFinish={handleFinish}
-      />
-      <CaseDetail caseData={selectedCase} />
+    <Box sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
+      {isMobile && (
+        <Tabs
+          value={currentTab}
+          onChange={(e, newValue) => setCurrentTab(newValue)}
+          sx={{
+            bgcolor: "white",
+            flexShrink: 0,
+            borderBottom: "1px solid #ddd",
+            height: "48px", // Fixed height for tabs
+          }}
+          centered
+        >
+          <Tab label="Chat" />
+          <Tab label="Case Details" />
+        </Tabs>
+      )}
+
+      {/* Content Area */}
+      <Box sx={{ flexGrow: 1, display: "flex", overflow: "hidden" }}>
+        {isMobile ? (
+          currentTab === 0 ? (
+            <CaseChat
+              caseData={selectedCase}
+              onBack={handleBack}
+              onReset={handleReset}
+              feedbackLoading={feedbackLoading}
+              onFinish={handleFinish}
+            />
+          ) : (
+            <CaseDetail caseData={selectedCase} />
+          )
+        ) : (
+          <>
+            <CaseChat
+              caseData={selectedCase}
+              onBack={handleBack}
+              onReset={handleReset}
+              feedbackLoading={feedbackLoading}
+              onFinish={handleFinish}
+            />
+            <CaseDetail caseData={selectedCase} />
+          </>
+        )}
+      </Box>
+
       <FeedbackModal
         open={feedbackModalOpen}
         handleCloseModal={handleCloseModal}

@@ -1,14 +1,17 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 
 export default function CaseDetail({ caseData }) {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   return (
     <Box
       sx={{
         display: "flex",
         flexDirection: "column",
         height: "100%",
-        width: "50%",
+        width: isMobile ? "100%" : "50%",
         bgcolor: "white",
       }}
     >

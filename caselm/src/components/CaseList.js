@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 
 import { caseFeedbackExists, getChatHistory } from "@/utils/localStorage";
-import { cases } from "@/data/cases";
 
 export default function CaseList({ cases, onCaseSelect, doneOnly }) {
   const getCaseStatus = (caseId) => {

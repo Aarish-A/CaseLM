@@ -10,8 +10,10 @@ import {
   Tooltip,
   Typography,
   Modal,
+  useMediaQuery,
 } from "@mui/material";
-import { Home, Assignment, Group, RestartAlt } from "@mui/icons-material";
+import { Home, Assignment, Group, RestartAlt, Menu } from "@mui/icons-material";
+import { useTheme } from "@mui/material/styles";
 
 import { clearLocalStorage } from "@/utils/localStorage";
 
@@ -22,6 +24,10 @@ export default function AppLayout({
   pathname,
 }) {
   const [resetModalOpen, setResetModalOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const handleOpenResetModal = () => setResetModalOpen(true);
   const handleCloseResetModal = () => setResetModalOpen(false);
@@ -31,23 +37,158 @@ export default function AppLayout({
     location.reload();
   };
 
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
   const navIcons = {
     Profile: <Home />,
     CaseLM: <Assignment />,
     GroupLM: <Group />,
   };
 
+  // Sidebar Content Component
+  const DrawerContent = (
+    <>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          px: 2,
+          mb: 2,
+        }}
+      >
+        <Typography variant="h5" component="div" sx={{ fontWeight: "bold" }}>
+          CaseLM
+        </Typography>
+        {isMobile && (
+          <IconButton onClick={handleDrawerToggle}>
+            <Menu />
+          </IconButton>
+        )}
+      </Box>
+      <List>
+        {navItems.map((item) => {
+          const isDisabled = item.label === "GroupLM";
+          return (
+            <ListItem key={item.label} disablePadding>
+              <Tooltip
+                title={isDisabled ? "Coming Soon" : ""}
+                arrow
+                placement="right"
+              >
+                <span style={{ width: "100%" }}>
+                  <ListItemButton
+                    onClick={() => !isDisabled && handleNavigation(item.path)}
+                    selected={pathname === item.path && !isDisabled}
+                    disabled={isDisabled}
+                    sx={{
+                      borderRadius: 3,
+                      color: isDisabled
+                        ? "#303030"
+                        : pathname === item.path
+                        ? "#000000"
+                        : "#454746",
+                      backgroundColor: isDisabled
+                        ? "transparent"
+                        : pathname === item.path
+                        ? "#d3e2fd"
+                        : "transparent",
+                      "&:hover": {
+                        backgroundColor:
+                          isDisabled || pathname === item.path
+                            ? "transparent"
+                            : "#e5e7eb",
+                      },
+                      px: 1,
+                      py: 0,
+                      mb: 1,
+                      pointerEvents: isDisabled ? "none" : "auto",
+                    }}
+                  >
+                    <IconButton
+                      sx={{
+                        color: pathname === item.path ? "#000000" : "#454746",
+                      }}
+                    >
+                      {navIcons[item.label]}
+                    </IconButton>
+                    <Typography
+                      sx={{
+                        fontWeight: pathname === item.path ? "bold" : "normal",
+                        ml: 1,
+                      }}
+                    >
+                      {item.label}
+                    </Typography>
+                  </ListItemButton>
+                </span>
+              </Tooltip>
+            </ListItem>
+          );
+        })}
+      </List>
+      <Box sx={{ flexGrow: 1 }} />
+      <Button
+        variant="contained"
+        onClick={handleOpenResetModal}
+        size="small"
+        disableElevation
+        color="error"
+        sx={{
+          py: 1,
+          borderRadius: 2,
+        }}
+      >
+        <RestartAlt sx={{ mr: 1 }} />
+        Reset App
+      </Button>
+    </>
+  );
+
   return (
     <Box
-      sx={{ display: "flex", minHeight: "100vh", backgroundColor: "#ffffff" }}
+      sx={{
+        display: "flex",
+        height: "100vh",
+        backgroundColor: "#ffffff",
+      }}
     >
-      {/* Sidebar */}
+      {/* Mobile AppBar for Hamburger Menu */}
+      {isMobile && (
+        <Box
+          sx={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            bgcolor: "#f0f4f8",
+            zIndex: theme.zIndex.drawer + 1,
+            display: "flex",
+            alignItems: "center",
+            p: 1,
+          }}
+        >
+          <IconButton onClick={handleDrawerToggle} sx={{ mr: 2 }}>
+            <Menu />
+          </IconButton>
+          <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+            CaseLM
+          </Typography>
+        </Box>
+      )}
+
+      {/* Desktop Sidebar */}
       <Drawer
-        variant="permanent"
+        variant={isMobile ? "temporary" : "permanent"}
+        open={isMobile ? mobileOpen : true}
+        onClose={handleDrawerToggle}
         sx={{
-          width: 185,
+          display: { xs: "block", sm: "block" },
+          width: isMobile ? "auto" : 185,
           flexShrink: 0,
-          [`& .MuiDrawer-paper`]: {
+          "& .MuiDrawer-paper": {
             width: 185,
             boxSizing: "border-box",
             backgroundColor: "#f0f4f8",
@@ -56,108 +197,22 @@ export default function AppLayout({
             border: "none",
           },
         }}
+        ModalProps={{
+          keepMounted: true, // Better performance on mobile
+        }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            px: 2,
-            mb: 2,
-          }}
-        >
-          <Typography variant="h5" component="div" sx={{ fontWeight: "bold" }}>
-            CaseLM
-          </Typography>
-        </Box>
-        <List>
-          {navItems.map((item) => {
-            const isDisabled = item.label === "GroupLM";
-            return (
-              <ListItem key={item.label} disablePadding>
-                <Tooltip
-                  title={isDisabled ? "Coming Soon" : ""}
-                  arrow
-                  placement="right"
-                >
-                  <span style={{ width: "100%" }}>
-                    <ListItemButton
-                      onClick={() => !isDisabled && handleNavigation(item.path)}
-                      selected={pathname === item.path && !isDisabled}
-                      disabled={isDisabled}
-                      sx={{
-                        borderRadius: 3,
-                        color: isDisabled
-                          ? "#303030"
-                          : pathname === item.path
-                          ? "#000000"
-                          : "#454746",
-                        backgroundColor: isDisabled
-                          ? "transparent"
-                          : pathname === item.path
-                          ? "#d3e2fd"
-                          : "transparent",
-                        "&:hover": {
-                          backgroundColor:
-                            isDisabled || pathname === item.path
-                              ? "transparent"
-                              : "#e5e7eb",
-                        },
-                        px: 1,
-                        py: 0,
-                        mb: 1,
-                        pointerEvents: isDisabled ? "none" : "auto",
-                      }}
-                    >
-                      <IconButton
-                        sx={{
-                          color: pathname === item.path ? "#000000" : "#454746",
-                        }}
-                      >
-                        {navIcons[item.label]}
-                      </IconButton>
-                      <Typography
-                        sx={{
-                          fontWeight:
-                            pathname === item.path ? "bold" : "normal",
-                          ml: 1,
-                        }}
-                      >
-                        {item.label}
-                      </Typography>
-                    </ListItemButton>
-                  </span>
-                </Tooltip>
-              </ListItem>
-            );
-          })}
-        </List>
-        <Box sx={{ flexGrow: 1 }} />
-        {/* App Reset Button */}
-        <Button
-          variant="contained"
-          onClick={handleOpenResetModal}
-          size="small"
-          disableElevation
-          color="error"
-          sx={{
-            py: 1,
-            borderRadius: 2,
-          }}
-        >
-          <RestartAlt sx={{ mr: 1 }} />
-          Reset App
-        </Button>
+        {DrawerContent}
       </Drawer>
 
-      {/* Main Content Area */}
+      {/* Main Content */}
       <Box
         component="main"
         sx={{
-          flexGrow: 1,
-          padding: 0,
+          padding: isMobile ? "56px 0 0 0" : 0, // Adjust padding for mobile header
           margin: 0,
           backgroundColor: "#f9fafc",
+          flexShrinkY: 1,
+          flexGrow: 1,
         }}
       >
         {children}

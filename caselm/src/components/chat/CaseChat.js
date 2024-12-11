@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box } from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 
 import ChatHeader from "./ChatHeader";
 import ChatMessagesWindow from "./ChatMessagesWindow";
@@ -22,6 +22,8 @@ export default function CaseChat({
 }) {
   const [chatHistory, setChatHistory] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   useEffect(() => {
     const storedHistory = getChatHistory(caseData.id);
@@ -114,7 +116,7 @@ export default function CaseChat({
   return (
     <Box
       sx={{
-        width: "50%",
+        width: isMobile ? "100%" : "50%",
         height: "100%",
         display: "flex",
         flexDirection: "column",

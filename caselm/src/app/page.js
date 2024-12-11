@@ -100,7 +100,9 @@ export default function Profile() {
   return (
     <>
       <NameModal onClose={handleOverlayClose} />
-      <Box sx={{ backgroundColor: "#f9fafc", minHeight: "100vh", py: 5 }}>
+      <Box
+        sx={{ backgroundColor: "#f9fafc", minHeight: "100vh", py: 5, px: 4 }}
+      >
         {/* Intro Section */}
         <ProfileIntro name={name} />
 

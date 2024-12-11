@@ -1,7 +1,13 @@
 import React from "react";
-import { Box, Modal, IconButton, Typography } from "@mui/material";
+import {
+  Box,
+  Modal,
+  IconButton,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { Close } from "@mui/icons-material";
-
 import ReactMarkdownTypography from "./ReactMarkdownTypography";
 
 export default function FeedbackModal({
@@ -10,6 +16,9 @@ export default function FeedbackModal({
   caseData,
   feedback,
 }) {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md")); // Check if mobile
+
   return (
     <Modal open={open} onClose={handleCloseModal}>
       <Box
@@ -19,13 +28,13 @@ export default function FeedbackModal({
           left: "50%",
           transform: "translate(-50%, -50%)",
           bgcolor: "#f9fafc",
-          borderRadius: 4,
+          borderRadius: 3,
           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-          width: "85%",
+          width: isMobile ? "95%" : "85%", // Narrower on mobile
           maxWidth: "70rem",
           maxHeight: "90%",
           overflowY: "auto",
-          p: 6,
+          p: isMobile ? 2 : 4, // Adjust padding for mobile
         }}
       >
         {/* Header Section */}
@@ -34,24 +43,24 @@ export default function FeedbackModal({
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            px: 4,
+            px: isMobile ? 2 : 4,
             py: 2,
             mb: 2,
             backgroundColor: "#ffffff",
-            borderRadius: 4,
-            border: 1,
-            borderColor: "#e9eef6",
+            borderRadius: 2,
+            border: "1px solid #e9eef6",
           }}
         >
           <Typography
-            variant="h5"
+            variant={isMobile ? "h6" : "h5"} // Smaller header on mobile
             sx={{
               fontWeight: "bold",
               color: "#2c3e50",
-              maxWidth: "80%",
-              whiteSpace: "nowrap",
+              maxWidth: "90%", // Allow text to wrap
+              whiteSpace: "normal",
               overflow: "hidden",
               textOverflow: "ellipsis",
+              fontSize: isMobile ? "1rem" : "1.5rem",
             }}
           >
             Your feedback for {caseData?.title}
@@ -74,18 +83,18 @@ export default function FeedbackModal({
         {/* Feedback Content */}
         <Box
           sx={{
-            p: 4,
+            px: isMobile ? 2 : 4,
+            py: isMobile ? 1 : 3,
             backgroundColor: "#ffffff",
-            borderRadius: 4,
+            borderRadius: 2,
             overflowWrap: "break-word",
-            border: 1,
-            borderColor: "#e9eef6",
+            border: "1px solid #e9eef6",
           }}
         >
           {feedback ? (
             <ReactMarkdownTypography
               sx={{
-                fontSize: "16px",
+                fontSize: isMobile ? "14px" : "16px", // Adjust font size
                 color: "#4f5b62",
                 lineHeight: 1.6,
               }}
@@ -95,7 +104,7 @@ export default function FeedbackModal({
           ) : (
             <Typography
               sx={{
-                fontSize: "14px",
+                fontSize: isMobile ? "12px" : "14px",
                 color: "#9ea3a8",
                 textAlign: "center",
               }}
