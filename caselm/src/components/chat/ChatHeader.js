@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Button,
@@ -22,21 +22,19 @@ export default function ChatHeader({
 }) {
   const [showTooltip, setShowTooltip] = useState(false);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md")); // Mobile breakpoint
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  useEffect(() => {
+    if (caseData.hasExample) {
+      setTimeout(() => setShowTooltip(true), 2000);
+      setTimeout(() => setShowTooltip(false), 5000);
+    }
+  }, []);
 
   // Feedback Button Content
   const getFeedbackButtonContent = () => {
     if (feedbackLoading) return <CircularProgress size={20} color="inherit" />;
     return completed ? "View Feedback" : "Get Feedback";
-  };
-
-  // Tooltip for Feedback Button
-  const handleFeedbackClick = () => {
-    if (!completed) {
-      setShowTooltip(true);
-      setTimeout(() => setShowTooltip(false), 5000); // Hide tooltip after 5 seconds
-    }
-    onFinish();
   };
 
   return (
@@ -74,32 +72,30 @@ export default function ChatHeader({
       {/* Right Section: Buttons */}
       <Box sx={{ display: "flex", gap: 1 }}>
         {/* Reset Chat (Trash Icon on Mobile) */}
-        <Tooltip title="Reset Chat" arrow>
-          {isMobile ? (
-            <IconButton onClick={onReset} color="error">
-              <DeleteOutline />
-            </IconButton>
-          ) : (
-            <Button
-              onClick={onReset}
-              variant="outlined"
-              color="error"
-              sx={{ borderRadius: 2 }}
-            >
-              Reset Chat
-            </Button>
-          )}
-        </Tooltip>
+        {isMobile ? (
+          <IconButton onClick={onReset} color="error">
+            <DeleteOutline />
+          </IconButton>
+        ) : (
+          <Button
+            onClick={onReset}
+            variant="outlined"
+            color="error"
+            sx={{ borderRadius: 2 }}
+          >
+            Reset Chat
+          </Button>
+        )}
 
         {/* Feedback Button (Text stays consistent on Mobile and Desktop) */}
         <Tooltip
-          title="Hold tight, usually takes 10-15 seconds"
+          title="Get some example feedback for this case"
           open={showTooltip}
           arrow
           disableHoverListener
         >
           <Button
-            onClick={handleFeedbackClick}
+            onClick={onFinish}
             variant="contained"
             color="success"
             disabled={disabled}

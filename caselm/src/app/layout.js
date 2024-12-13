@@ -2,6 +2,7 @@
 
 import React from "react";
 import dynamic from "next/dynamic";
+import Head from "next/head";
 import { usePathname, useRouter } from "next/navigation";
 import { CssBaseline } from "@mui/material";
 
@@ -24,6 +25,9 @@ const Layout = ({ children }) => {
   return (
     <html lang="en">
       <body>
+        <Head>
+          <title>CaseLM</title>
+        </Head>
         <CssBaseline />
         <AppLayout
           navItems={navItems}

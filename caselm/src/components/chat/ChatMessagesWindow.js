@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { Box, Typography, Button, Link } from "@mui/material";
 import ChatMessage from "./ChatMessage";
 
@@ -7,14 +7,27 @@ export default function ChatMessagesWindow({
   onSendDefaultMessage,
   showExampleSnippitsLink = false,
 }) {
+  const scrollContainerRef = useRef(null);
+
   const defaultMessages = [
     "I'm not sure where to begin, could you help me out?",
     "What are the most important parts of this case to start?",
     "I've read the case and I'm ready. Where do we start?",
   ];
 
+  // Scroll to the bottom when chatHistory updates
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTo({
+        top: scrollContainerRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [chatHistory]);
+
   return (
     <Box
+      ref={scrollContainerRef} // Attach the ref to the scrollable container
       sx={{
         flex: 1,
         overflowY: "auto",
@@ -30,7 +43,7 @@ export default function ChatMessagesWindow({
         <Box
           sx={{
             position: "sticky",
-            top: 0,
+            top: 5,
             zIndex: 10,
             backgroundColor: "white",
             py: 1,

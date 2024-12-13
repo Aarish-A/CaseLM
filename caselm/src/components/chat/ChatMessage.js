@@ -7,7 +7,6 @@ export default function ChatMessage({ message, isUser }) {
   return (
     <Box
       sx={{
-        marginY: 1,
         paddingX: 3,
         paddingY: 2,
         borderRadius: "1rem",

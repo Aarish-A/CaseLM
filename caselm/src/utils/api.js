@@ -11,3 +11,11 @@ export const geminiChatHistoryToString = (chatHistory) => {
     })
     .join("\n\n");
 };
+
+export async function* streamChunks(reader, decoder) {
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
+    yield decoder.decode(value);
+  }
+}

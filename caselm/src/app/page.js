@@ -10,6 +10,7 @@ import ProfileCaseList from "@/components/profile/ProfileCaseList";
 import ProfileFeedbackSummary from "@/components/profile/ProfileFeedbackSummary";
 import ProfileIntroButtons from "@/components/profile/ProfileIntroButtons";
 
+import { streamChunks } from "@/utils/api";
 import {
   getCaseFeedback,
   caseFeedbackExists,
@@ -86,14 +87,6 @@ export default function Profile() {
       setFeedbackSummaryUpdating(false);
     }
   };
-
-  async function* streamChunks(reader, decoder) {
-    while (true) {
-      const { value, done } = await reader.read();
-      if (done) break;
-      yield decoder.decode(value);
-    }
-  }
 
   const hasFeedback = Object.keys(getAllCaseFeedbacks()).length > 0;
 

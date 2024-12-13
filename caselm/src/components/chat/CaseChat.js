@@ -6,6 +6,7 @@ import ChatMessagesWindow from "./ChatMessagesWindow";
 import ChatInput from "./ChatInput";
 
 import { exampleConversationMediDisplays } from "@/data/exampleConversationMediDisplays";
+import { streamChunks } from "@/utils/api";
 import {
   getChatHistory,
   saveChatHistory,
@@ -44,15 +45,6 @@ export default function CaseChat({
       { role, parts: [{ text: messageText }] },
     ]);
   };
-
-  // Helper to process stream chunks
-  async function* streamChunks(reader, decoder) {
-    while (true) {
-      const { value, done } = await reader.read();
-      if (done) break;
-      yield decoder.decode(value);
-    }
-  }
 
   // Helper to update message text
   const updateMessageText = (index, newText) => {

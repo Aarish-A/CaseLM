@@ -30,11 +30,11 @@ export default function FeedbackModal({
           bgcolor: "#f9fafc",
           borderRadius: 3,
           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-          width: isMobile ? "95%" : "85%", // Narrower on mobile
-          maxWidth: "70rem",
-          maxHeight: "90%",
+          width: "95%",
+          maxWidth: "65rem",
+          height: "85%",
           overflowY: "auto",
-          p: isMobile ? 2 : 4, // Adjust padding for mobile
+          p: isMobile ? 2 : 4,
         }}
       >
         {/* Header Section */}
@@ -109,7 +109,7 @@ export default function FeedbackModal({
                 textAlign: "center",
               }}
             >
-              No feedback available for this case.
+              Loading feedback...
             </Typography>
           )}
         </Box>

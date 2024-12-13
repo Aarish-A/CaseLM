@@ -16,6 +16,7 @@ import CaseDetail from "@/components/CaseDetail";
 import FeedbackModal from "@/components/FeedbackModal";
 
 import { cases } from "../../data/cases";
+import { streamChunks } from "@/utils/api";
 import {
   getChatHistory,
   saveCaseFeedback,
@@ -67,6 +68,7 @@ export default function CaseLM() {
 
     try {
       setFeedbackLoading(true);
+      setFeedbackModalOpen(true);
       const caseData = selectedCase;
       const response = await fetch("/api/gemini/caselmfeedback", {
         method: "POST",
@@ -77,15 +79,19 @@ export default function CaseLM() {
         }),
       });
 
-      const data = await response.json();
+      if (!response.body) throw new Error("No response body");
 
-      if (data.response) {
-        const feedbackContent = data.response;
-        setFeedback(feedbackContent);
-        setFeedbackModalOpen(true);
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let accumulatedMessage = "";
+
+      // Stream and update feedback modal
+      for await (const chunk of streamChunks(reader, decoder)) {
+        accumulatedMessage += chunk;
+        setFeedback(accumulatedMessage);
       }
     } catch (error) {
-      console.error("Failed to process feedback:", error);
+      console.error("Failed to process feedback streaming:", error);
     } finally {
       setFeedbackLoading(false);
     }

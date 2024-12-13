@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Box,
   Button,
@@ -17,10 +17,18 @@ export default function NameModal({ onClose }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
+  const inputRef = useRef(null);
+
   useEffect(() => {
     const storedName = getName();
     if (storedName) setOpen(false);
   }, []);
+
+  useEffect(() => {
+    if (open && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [open]); // Trigger focus to TextField when the modal opens
 
   const handleConfirm = () => {
     if (name.trim()) {
@@ -91,6 +99,7 @@ export default function NameModal({ onClose }) {
           variant="filled"
           fullWidth
           value={name}
+          inputRef={inputRef}
           onChange={(e) => setName(e.target.value)}
           onKeyDown={handleKeyDown}
           InputProps={{

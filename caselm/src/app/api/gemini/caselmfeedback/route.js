@@ -56,13 +56,29 @@ export async function POST(req) {
       ],
     });
 
-    const result = await chat.sendMessage(
-      `${userPrompt} \n\n ${geminiChatHistoryToString(chatHistory)}`
-    );
+    const userMessage = `${userPrompt} \n\n ${geminiChatHistoryToString(
+      chatHistory
+    )}`;
+    const resultStream = await chat.sendMessageStream(userMessage);
 
-    return new Response(JSON.stringify({ response: result.response.text() }), {
-      status: 200,
-    });
+    return new Response(
+      new ReadableStream({
+        async start(controller) {
+          for await (const chunk of resultStream.stream) {
+            controller.enqueue(chunk.text());
+          }
+          controller.close();
+        },
+        cancel() {
+          console.log("Stream canceled");
+        },
+      }),
+      {
+        headers: {
+          "Content-Type": "text/plain",
+        },
+      }
+    );
   } catch (error) {
     console.error("Error in Gemini API Route:", error);
     return new Response(JSON.stringify({ error: "Something went wrong." }), {
